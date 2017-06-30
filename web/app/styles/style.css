@@ -1,0 +1,175 @@
+/* Font-face
+============================================================================= */
+@font-face {
+    font-family: 'FontAwesome';
+    src: url('../fonts/fontawesome-webfont.eot');
+    src: url('../fonts/fontawesome-webfont.eot?#iefix&v=4.6.3') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff2?v=4.6.3') format('woff2'), url('../fonts/fontawesome-webfont.woff?v=4.6.3') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=4.6.3') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 移除响应式导航栏 */
+.navbar.un-responsive .navbar-header,
+.navbar.un-responsive .nav > li{
+    float: left!important;
+}
+html, body {
+    cursor: default;
+}
+
+/*弹出提示框*/
+.alert-global-tip {
+    position: absolute;
+    left: 50%;
+    z-index: 300;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+/*文本样式*/
+.text-default {
+    color: #777;
+}
+.text-default:hover {
+    color: #333;
+}
+
+/* bootstrap-table下的操作列中的按钮样式 */
+.bootstrap-table .glyphicon {
+    color: #333;
+    cursor: pointer;
+}
+
+.bootstrap-table .glyphicon:hover {
+    color: #4A49F2;
+}
+
+.bootstrap-table .glyphicon + .glyphicon {
+    margin-left: 10px;
+}
+
+/* 自定义bootstrap-edit */
+.bt-col-editable .glyphicon {
+    font-size: 9px;
+    margin-left: 10px;
+    visibility: hidden;
+}
+
+td.show .bt-col-editable .glyphicon {
+    visibility: visible;
+}
+
+.edit-panel {
+    position: absolute;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    z-index: 1;
+}
+
+.edit-panel-title {
+    padding: 5px 0 5px 10px;
+}
+
+.edit-panel-close {
+    padding: 1px 10px;
+    cursor: pointer;
+    opacity: 0.8;
+    font-weight: bold;
+    color: #333;
+    float: right;
+    font-size: 20px;
+    display: block;
+    margin-top: -5px;
+}
+
+.edit-panel-close:hover {
+    opacity: 1;
+}
+
+.edit-panel-body {
+    padding: 10px;
+}
+
+.edit-panel-footer {
+    text-align: right;
+    padding: 5px 10px;
+}
+
+.edit-panel-footer .btn {
+    padding: 4px 18px;
+}
+
+/* 使用字体图标 */
+.common-icon::before{
+    display: inline-block;
+    font-family: "FontAwesome";
+    font-weight: normal;
+    font-style: normal;
+    vertical-align: baseline;
+    line-height:1;
+}
+.common-icon-reply::before{
+    content: '\f112';
+}
+.common-icon-share::before{
+    content: '\f064';
+}
+.common-icon-thumb::before{
+    content: '\f164';
+}
+.common-icon-report::before{
+    content: '\f12a';
+}
+.common-icon-trash::before{
+    content: '\f1f8';
+}
+.common-icon-down::before{
+    content: '\f107';
+}
+
+/* custom-select */
+.custom-select-wrap{
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 200px;
+}
+.custom-select-list{
+    position: absolute;
+    width: 100%;
+    border: 1px solid #66afe9;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    overflow: auto;
+    max-height: 120px;
+}
+.custom-select-item{
+    line-height: 25px;
+    background-color: #fff;
+    padding-left: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    word-break: keep-all;
+    text-overflow: ellipsis;
+}
+.custom-select-item.active{
+    background-color: #f5e79e;
+}
+.custom-select-no-click.active{
+    background-color: #fff!important;
+}
+.custom-select-main{
+    background: url("../images/down.png") no-repeat 96%;
+    background-size: 16px 16px;
+    padding-right: 30px;
+}
+.un-select{
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

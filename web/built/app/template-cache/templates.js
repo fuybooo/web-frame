@@ -1,0 +1,2 @@
+angular.module('templates').run(['$templateCache', function($templateCache) {$templateCache.put('app/views/home.html','<div ui-view=""></div>');
+$templateCache.put('app/views/landing.html','landing3');}]);

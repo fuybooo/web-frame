@@ -1,0 +1,24 @@
+{
+  "name": "angular-ui-load",
+  "version": "1.0.0",
+  "main": "angular-ui-load.js",
+  "license": "MIT",
+  "homepage": "https://github.com/puxos/angular-ui-load",
+  "ignore": [
+    "src",
+    "example"
+  ],
+  "dependencies": {
+    "angular": ">=1.2.0"
+  },
+  "_release": "1.0.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.0.0",
+    "commit": "18bd55875d86c12c508f78b8b1b757ab696daf19"
+  },
+  "_source": "https://github.com/puxos/angular-ui-load.git",
+  "_target": "^1.0.0",
+  "_originalSource": "angular-ui-load",
+  "_direct": true
+}

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en" class="w h">
+    <head>
+        <meta charset="UTF-8">
+        <!--<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">-->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="renderer" content="webkit">
+        <!--<meta http-equiv="Cache-Control" content="no-siteapp" />-->
+        <title ng-bind="pageTitle"></title>
+
+        <!--引入css文件-->
+        <link rel="stylesheet" href="app/vendor/bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" href="app/vendor/bootstrap-table/bootstrap-table.css">
+        <link rel="stylesheet" href="app/vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
+        <link rel="stylesheet" href="app/styles/base.css">
+        <link rel="stylesheet" href="app/styles/popupwin.css">
+        <link rel="stylesheet" href="app/styles/style.css">
+        <!--合并的css文件-->
+        <!--todo： 引入合并的css文件-->
+
+        <!--引入库文件-->
+        <!--手动引入库文件需要注意依赖关系-->
+        <script src="app/vendor/jquery/jquery.js"></script>
+        <script src="app/vendor/underscore/underscore.js"></script>
+        <script src="app/vendor/moment/moment.js"></script>
+        <script src="app/vendor/angular/angular.js"></script>
+        <script src="app/vendor/bootstrap/js/bootstrap.js"></script>
+        <script src="app/vendor/echarts/echarts.js"></script>
+        <script src="app/vendor/bootstrap-table/bootstrap-table.js"></script>
+        <script src="app/vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
+        <script src="app/vendor/angular-ui-load/angular-ui-load.js"></script>
+        <script src="app/vendor/angular-ui-router/angular-ui-router.js"></script>
+        <script src="app/vendor/angular-animate/angular-animate.js"></script>
+        <script src="app/vendor/angular-sanitize/angular-sanitize.js"></script>
+        <script src="app/vendor/angular-touch/angular-touch.js"></script>
+        <script src="app/vendor/angular-translate/angular-translate.min.js"></script>
+        <script src="app/vendor/angular-ueditor/angular-ueditor.js"></script>
+        <script src="app/vendor/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+        <script src="app/vendor/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+        <script src="app/vendor/bootstrap-table/bootstrap-table-locale-all.js"></script>
+
+        <!--引入合并后的库文件-->
+        <!--todo： 引入合并后的库文件-->
+
+        <!--引入angular主模块 app-->
+        <script src="app/scripts/configs/app.js"></script>
+
+        <!--公共资源-->
+        <script src="app/scripts/common/common-service.js"></script>
+        <script src="app/scripts/common/data-service.js"></script>
+        <script src="app/scripts/common/common-directive.js"></script>
+        <script src="app/scripts/common/common-filter.js"></script>
+        <script src="app/scripts/common/bootstrap-table-directive.js"></script>
+        <script src="app/scripts/common/popupwin-service.js"></script>
+
+        <!--路由-->
+        <script src="app/scripts/configs/router.js"></script>
+
+        <!--各模块资源-->
+        <script src="app/scripts/home/landing-controller.js"></script>
+
+
+    </head>
+    <body class="w h">
+        <div ui-view class="w h"></div>
+    </body>
+</html>
