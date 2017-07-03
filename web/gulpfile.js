@@ -63,6 +63,8 @@ gulp.task('js', function () {
         // 按顺序加载项目中的js文件，在“其他文件”之上的文件一般不会有改动（文件名称的增减），除非新增公共的文件，否则此处不需要进行添加
         // 启动文件
         'app/scripts/configs/app.js',
+        // 国际化 --- 需要改变时可以进行修改即可
+        'app/scripts/language/cn.js',
         // 路由
         'app/scripts/configs/router.js',
         // 公共文件

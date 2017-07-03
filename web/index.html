@@ -35,10 +35,9 @@
         <script src="app/vendor/angular-animate/angular-animate.js"></script>
         <script src="app/vendor/angular-sanitize/angular-sanitize.js"></script>
         <script src="app/vendor/angular-touch/angular-touch.js"></script>
-        <script src="app/vendor/angular-translate/angular-translate.min.js"></script>
+        <script src="app/vendor/angular-translate/angular-translate.js"></script>
         <script src="app/vendor/angular-ueditor/angular-ueditor.js"></script>
         <script src="app/vendor/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
-        <script src="app/vendor/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
         <script src="app/vendor/bootstrap-table/bootstrap-table-locale-all.js"></script>
 
         <!--引入合并后的库文件-->
@@ -46,7 +45,11 @@
 
         <!--引入angular主模块 app-->
         <script src="app/scripts/configs/app.js"></script>
-
+        <!--国际化-->
+        <script src="app/scripts/language/cn.js"></script>
+        <!--<script src="app/scripts/language/en.js"></script>-->
+        <!--路由-->
+        <script src="app/scripts/configs/router.js"></script>
         <!--公共资源-->
         <script src="app/scripts/common/common-service.js"></script>
         <script src="app/scripts/common/data-service.js"></script>
@@ -55,8 +58,7 @@
         <script src="app/scripts/common/bootstrap-table-directive.js"></script>
         <script src="app/scripts/common/popupwin-service.js"></script>
 
-        <!--路由-->
-        <script src="app/scripts/configs/router.js"></script>
+
 
         <!--各模块资源-->
         <script src="app/scripts/home/landing-controller.js"></script>

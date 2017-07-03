@@ -46,14 +46,6 @@ angular.module('app', ['ui.router', 'ui.load', 'ngSanitize', 'ngAnimate', 'ngTou
     //配置APP
     .config(function ($httpProvider, $translateProvider) {
 
-        // 配置国际化
-        var lang = localStorage.getItem('localLanguage') || 'cn';
-        $translateProvider.useStaticFilesLoader({
-            prefix: 'app/json/i18n/',
-            suffix: '.json'
-        });
-        $translateProvider.preferredLanguage(lang);
-
         // Use x-www-form-urlencoded Content-Type
         $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
         /**

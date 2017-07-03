@@ -1,4 +1,4 @@
-angular.module('app').factory('commonService', function ($timeout, $compile) {
+angular.module('app').factory('commonService', function ($timeout, $compile, $translate) {
     var service = {};
     /**
      * 全局计数器
@@ -43,13 +43,13 @@ angular.module('app').factory('commonService', function ($timeout, $compile) {
         ERROR: 1
     };
 
-    // /**
-    //  * language 多语言转换 translateLanguage
-    //  * @type {null}
-    //  */
-    // service.TL = function(key){
-    //     $translate.instant(key);
-    // };
+    /**
+     * language 多语言转换 translateLanguage
+     * @type {null}
+     */
+    service.tl = function(key){
+        return $translate.instant(key);
+    };
 
     var timeout = null;
     /**
