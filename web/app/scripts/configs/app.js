@@ -23,12 +23,12 @@ angular.module('app', ['ui.router', 'ui.load', 'ngSanitize', 'ngAnimate', 'ngTou
             request: function (config) {
                 // 在每次发送请求之前拦截，可以进行权限判断，或者参数处理等
                 // 处理成功返回config，处理失败返回false，并提示处理结果
-                return config;
+                return $q.when(config);
             },
             response: function (res) {
                 // 在每次请求响应之后进行拦截，可以进行错误处理等
                 // 出现错误，报告错误，返回res，没有错误，返回res
-                return res;
+                return $q.when(res);
             },
             requestError: function (request) {
                 // 请求之前发生了错误（请求没有发送到后台）

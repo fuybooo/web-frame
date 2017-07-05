@@ -11,7 +11,7 @@ gulp.task('style', function () {
     "use strict";
     return gulp.src([
         // 按顺序加载所有用到的css，如果有新增的css文件，必须放到这里
-        'app/vendor/bootstrap/css/bootstrap.css',
+        'app/styles/bootstrap.css',
         'app/vendor/bootstrap-table/bootstrap-table.css',
         'app/vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css',
         'app/styles/base.css',
@@ -155,6 +155,11 @@ gulp.task('serve', function () {
 gulp.task('default', ['serve', 'watch']);
 /**
  * 执行打包任务（发布）
+ *
+ * 打包步骤：
+ *  0.cd 到web目录下
+ *  1.gulp clean
+ *  2.gulp release
  */
 gulp.task('clean', function () {
     "use strict";

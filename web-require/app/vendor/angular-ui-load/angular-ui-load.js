@@ -1,1 +1,90 @@
-"use strict";angular.module("ui.load",[]).service("uiLoad",["$document","$q","$timeout",function(e,r,n){var t=[],o=!1,i=r.defer();this.load=function(e){e=angular.isArray(e)?e:e.split(/\s+/);var r=this;return o||(o=i.promise),angular.forEach(e,function(e){o=o.then(function(){return e.indexOf(".css")>=0?r.loadCSS(e):r.loadScript(e)})}),i.resolve(),o},this.loadScript=function(o){if(t[o])return t[o].promise;var i=r.defer(),u=e[0].createElement("script");return u.src=o,u.onload=function(e){n(function(){i.resolve(e)})},u.onerror=function(e){n(function(){i.reject(e)})},e[0].body.appendChild(u),t[o]=i,i.promise},this.loadCSS=function(o){if(t[o])return t[o].promise;var i=r.defer(),u=e[0].createElement("link");return u.rel="stylesheet",u.type="text/css",u.href=o,u.onload=function(e){n(function(){i.resolve(e)})},u.onerror=function(e){n(function(){i.reject(e)})},e[0].head.appendChild(u),t[o]=i,i.promise}}]);
+'use strict';
+
+/**
+ * 1.0.0
+ * Deferred load js/css file, used for angular-ui-jq.js and Lazy Loading.
+ * 
+ */
+angular.module('ui.load', []).service('uiLoad', ['$document', '$q', '$timeout', 
+	function ($document, $q, $timeout) {
+		var loaded = [];
+		var promise = false;
+		var deferred = $q.defer();
+
+		/**
+		 * Chain loads the given sources
+		 * @param srcs array, script or css
+		 * @returns {*} Promise that will be resolved once the sources has been loaded.
+		 */
+		this.load = function (srcs) {
+			srcs = angular.isArray(srcs) ? srcs : srcs.split(/\s+/);
+			var self = this;
+			if (!promise) {
+				promise = deferred.promise;
+			}
+      		angular.forEach(srcs, function(src) {
+      			promise = promise.then(function() {
+      				return src.indexOf('.css') >=0 ? self.loadCSS(src) : self.loadScript(src);
+      			});
+      		});
+      		deferred.resolve();
+      		return promise;
+		}
+
+		/**
+		 * Dynamically loads the given script
+		 * @param src The url of the script to load dynamically
+		 * @returns {*} Promise that will be resolved once the script has been loaded.
+		 */
+		this.loadScript = function (src) {
+			if (loaded[src]) return loaded[src].promise;
+
+			var deferred = $q.defer();
+			var script = $document[0].createElement('script');
+			script.src = src;
+			script.onload = function (e) {
+				$timeout(function () {
+					deferred.resolve(e);
+				});
+			};
+			script.onerror = function (e) {
+				$timeout(function () {
+					deferred.reject(e);
+				});
+			};
+			$document[0].body.appendChild(script);
+			loaded[src] = deferred;
+
+			return deferred.promise;
+		};
+
+		/**
+		 * Dynamically loads the given CSS file
+		 * @param href The url of the CSS to load dynamically
+		 * @returns {*} Promise that will be resolved once the CSS file has been loaded.
+		 */
+		this.loadCSS = function (href) {
+			if (loaded[href]) return loaded[href].promise;
+
+			var deferred = $q.defer();
+			var style = $document[0].createElement('link');
+			style.rel = 'stylesheet';
+			style.type = 'text/css';
+			style.href = href;
+			style.onload = function (e) {
+				$timeout(function () {
+					deferred.resolve(e);
+				});
+			};
+			style.onerror = function (e) {
+				$timeout(function () {
+					deferred.reject(e);
+				});
+			};
+			$document[0].head.appendChild(style);
+			loaded[href] = deferred;
+
+			return deferred.promise;
+		};
+	}
+]);

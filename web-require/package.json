@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "amd-optimize": "^0.6.1",
     "browser-sync": "^2.18.8",
     "gulp": "^3.9.1",
     "gulp-angular-templatecache": "^2.0.0",
@@ -31,6 +32,7 @@
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^2.0.0",
-    "jshint": "^2.9.5"
+    "jshint": "^2.9.5",
+    "requirejs": "^2.3.3"
   }
 }

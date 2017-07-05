@@ -11,7 +11,9 @@
         <title ng-bind="pageTitle"></title>
 
         <!--引入css文件-->
-        <link rel="stylesheet" href="app/vendor/bootstrap/css/bootstrap.css">
+        <!--对bootstrap.css引用路径进行修改&#45;&#45;保证压缩前后其引用字体文件的一致性-->
+        <!--从bower中将资源分别复制到指定地方1.bootstrap/css复制到app/styles下,bootstrap/fonts复制到app/fonts下-->
+        <link rel="stylesheet" href="app/styles/bootstrap.css">
         <link rel="stylesheet" href="app/vendor/bootstrap-table/bootstrap-table.css">
         <link rel="stylesheet" href="app/vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
         <link rel="stylesheet" href="app/styles/base.css">

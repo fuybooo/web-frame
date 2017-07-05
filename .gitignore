@@ -1,5 +1,6 @@
 .idea
 .git/
+web-require-demo/
 *~
 npm-debug.log
 

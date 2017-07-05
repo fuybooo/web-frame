@@ -7,10 +7,8 @@ define(
         'module'
     ],
     function (angular, asyncLoader, require, exports, module) {
-        //console.info("创建angular项目启动模块app,初始化依赖项有'ui.router','ui.load','ngSanitize','ngAnimate','ngTouch','ui.bootstrap'...");
-        /*var angular = require('angular');
-         var asyncLoader = require('angular-async-loader');*/
-        var app = angular.module('app', ['ui.router', 'ui.load', 'ngSanitize', 'ngAnimate', 'ngTouch', 'ui.bootstrap','pascalprecht.translate'/* 国际化 */, 'templates'/* 模板缓存 */,'ng.ueditor'/* angular-ueditor */]);
+        angular.module('templates', []);
+        var app = angular.module('app', ['ui.router', 'ui.load', 'ngSanitize', 'ngAnimate', 'ngTouch','pascalprecht.translate'/* 国际化 */, 'templates'/* 模板缓存 */]);
         //配置APP
         app.config(configure);
         var ip = '127.0.0.1';// 本地使用的ip
@@ -36,12 +34,12 @@ define(
             app.registerService = $provide.service;
 
             // 配置国际化
-            var lang = localStorage.getItem('localLanguage') || 'cn';
-            $translateProvider.useStaticFilesLoader({
-                prefix: 'app/json/i18n/',
-                suffix: '.json'
-            });
-            $translateProvider.preferredLanguage(lang);
+            // var lang = localStorage.getItem('localLanguage') || 'cn';
+            // $translateProvider.useStaticFilesLoader({
+            //     prefix: 'app/json/i18n/',
+            //     suffix: '.json'
+            // });
+            // $translateProvider.preferredLanguage(lang);
 
             // Use x-www-form-urlencoded Content-Type
             $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';

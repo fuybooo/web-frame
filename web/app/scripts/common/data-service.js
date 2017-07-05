@@ -1,6 +1,17 @@
 angular.module('app').factory('dataService', function ($http, $injector, baseRequestUrl, baseStaticUrl, webSocketUrl) {
     var service = {};
     /**
+     * 所有请求路径
+     * 开发过程中，可以使用json数据代替后端数据，当要请求后端真实数据时，只需切换一下即可
+     */
+    service.URL = {
+        test: 'test.json', // 测试数据，与后端联调时关闭
+        // test: 'test' // 真实路径，与后端联调时打开
+
+        // user: 'user.json',
+        user: 'user'
+    };
+    /**
      * 请求资源
      */
     var request = function () {
@@ -24,19 +35,24 @@ angular.module('app').factory('dataService', function ($http, $injector, baseReq
 
         //
         var commonService = $injector.get('commonService');
-        promise.success(function (res) {
-            if (method !== 'GET') {
-                if (res.msg) {
-                    commonService.alert(res.msg, res.code);
+        promise.then(function (res) {
+            if(res){
+                var data = res.data;
+                if (method !== 'GET') {
+                    if (data.msg) {
+                        commonService.alert(data.msg, data.code);
+                    }
+                }
+                if (cb_s) {
+                    cb_s(data);
                 }
             }
-            if (cb_s) {
-                cb_s(res);
-            }
-        }).error(function (res) {
-            commonService.alert(res.msg || '发生严重错误！', res.code);
-            if (cb_e) {
-                cb_e(res);
+        }).then(function (res) {
+            if(res) {
+                commonService.alert((res && res.msg) || '发生严重错误！', (res && res.code) || -1);
+                if (cb_e) {
+                    cb_e(res);
+                }
             }
         });
     };
@@ -70,9 +86,9 @@ angular.module('app').factory('dataService', function ($http, $injector, baseReq
         }
         var requestType = url.slice(-5);
         if (requestType === '.html') {
-            url = baseStaticUrl + 'views/';
+            url = baseStaticUrl + 'views/' + url;
         } else if (requestType === '.json') {
-            url = baseStaticUrl + 'json/';
+            url = baseStaticUrl + 'json/' + url;
         } else {
             url = baseRequestUrl + url;
         }
@@ -93,10 +109,7 @@ angular.module('app').factory('dataService', function ($http, $injector, baseReq
         }
         return $http(options);
     };
-    /**
-     * 所有请求路径
-     */
-    service.URL = {};
+
     return service;
 
 });
