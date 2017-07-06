@@ -172,6 +172,25 @@ angular.module('app')
     })
     /**
      * 生成验证规则
+     * 指令使用说明:
+     * 1.用途:自动生成验证提示
+     * 2.用法:
+     *  1.基本用法
+     *      1.在需要使用验证的输入框后面加上一个包含该指令的标签,如:
+     *          <span validate-generator></span>
+     *          能够处理angular所有的内置指令,默认的提示信息可以在指令内部修改.
+     *  2.高级用法
+     *      1.提示信息不是输入框的下一个元素,则可以指定一个id,如:
+     *      <input id="inputId" required>
+     *      <span></span>
+     *      <span validate-generator="inputId"></span>
+     *      2.提示信息不在form标签内
+     *      <form name="formName"></form>
+     *      <input id="inputId" required>
+     *      <span validate-generator data-form="formName"></span>
+     *      3.输入框中有自定义的指令验证器
+     *      <input is-exist is-valid>
+     *      <span validate-generator data-custom-validate="is-exist:已经存在|is-valid:不合法"></span>
      */
     .directive('validateGenerator', function (commonService) {
         return {
@@ -179,7 +198,7 @@ angular.module('app')
             template: function (tEle, tAttr) {
                 // 获取生成验证规则的目标
                 var $target = tAttr.validateGenerator ? $('#' + tAttr.validateGenerator) : $(tEle).prev();
-                // 找到验证规则，自定义验证规则需要在span标签上写明：data-custom-validate="custom-a:已经存在,custom-b:包含敏感字"；以中划线拼接
+                // 找到验证规则，自定义验证规则需要在span标签上写明：data-custom-validate="custom-a:已经存在|custom-b:包含敏感字"；以中划线拼接
                 var validates = [];
                 // 添加angular内置验证规则
                 var type = $target.attr('type');
@@ -208,7 +227,7 @@ angular.module('app')
                 }
                 // 添加自定义验证规则
                 validates = validates.concat(tAttr.customValidate ?
-                    tAttr.customValidate.split(',').map(function (item) {
+                    tAttr.customValidate.split('|').map(function (item) {
                         return {name: item.split(':')[0].trim(), desc: item.split(':')[1].trim()};
                     }).filter(function (item) {
                         return item.name in $target[0].attributes;
@@ -246,7 +265,7 @@ angular.module('app')
                 for (i = 0; i < validateHtml.length; i++) {
                     validateHtml[i] = validateHtml[i].replace('%%ngShow%%', ngShowArr[i]);
                 }
-                return '<span ng-show="!' + formName + '.' + $target[0].name + '.$pristine &&!' + formName + '.' + $target[0].name + '.$valid" class="text-danger">' + validateHtml.join('') + '</span>';
+                return '<span ng-show="!' + formName + '.' + $target[0].name + '.$pristine && !' + formName + '.' + $target[0].name + '.$valid" class="text-danger">' + validateHtml.join('') + '</span>';
             }
         };
     })

@@ -9,13 +9,18 @@ angular.module('app')
         $httpProvider.interceptors.push('httpInterceptor');
         //配置路由
         $stateProvider
+            .state('login', {
+                url: '',
+                templateUrl: 'app/views/login/login.html',
+                controller: 'LoginController'
+            })
             .state('home', {
                 abstract: true,
-                url: '',
+                url: '/home', // url必须以"/"开头,否则在前进后退的时候会出现找不到路径的情况
                 templateUrl: 'app/views/home.html'
             })
             .state('home.landing', {
-                url: '',
+                url: '/landing',
                 templateUrl: 'app/views/landing.html',
                 controller: 'LandingController'
             })

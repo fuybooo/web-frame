@@ -7506,7 +7506,7 @@ var HashLocationService = (function (_super) {
     __extends(HashLocationService, _super);
     function HashLocationService(router) {
         var _this = _super.call(this, router, false) || this;
-        window.addEventListener('hashchange', _this._listener, false);
+        window.addEventListener('hashchange.ui', _this._listener, false);
         return _this;
     }
     HashLocationService.prototype._get = function () {
@@ -7517,7 +7517,7 @@ var HashLocationService = (function (_super) {
     };
     HashLocationService.prototype.dispose = function (router) {
         _super.prototype.dispose.call(this, router);
-        window.removeEventListener('hashchange', this._listener);
+        window.removeEventListener('hashchange.ui', this._listener);
     };
     return HashLocationService;
 }(BaseLocationServices));

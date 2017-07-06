@@ -4,14 +4,22 @@ var port = 3003;
 var wsPort = 3004;
 angular.module('templates', []);
 angular.module('app', ['ui.router', 'ui.load', 'ngSanitize', 'ngAnimate', 'ngTouch', 'pascalprecht.translate'/* 国际化 */, 'templates'])
-    .run(function ($state, $stateParams, $rootScope, $anchorScroll) {
-        $rootScope.$state = $state;
-        $rootScope.$stateParams = $stateParams;
+    .run(function ($state, $stateParams, $rootScope, $anchorScroll, dataService) {
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
         });
-        $rootScope.$on('$stateChangeStart', function (evt, next, current) {
-        });
-        $rootScope.$on('$locationChangeStart', function () {
+        $rootScope.$on('$locationChangeStart', function (evt, current, prev) {
+            console.log('$locationChangeStart',arguments)
+            // 为了防止用户在已经登录系统的情况下再次进入登录界面,需要在用户跳转到登录界面时判断后台是否存在用户的session信息
+            // 如果存在,则直接进入登录后的界面,否则停留在登录界面.
+            var path = 'http://localhost:3000';
+            if(current === path || current === path + '/'){
+                dataService.get(dataService.URL.hasSession, function(data){
+                    if(data.code === 0){
+                        // 说明后台已经有session了
+                        $state.go('home.landing');
+                    }
+                });
+            }
         });
         $rootScope.$on('$viewContentLoaded', function () {
         });
@@ -103,5 +111,6 @@ angular.module('app', ['ui.router', 'ui.load', 'ngSanitize', 'ngAnimate', 'ngTou
 angular.element(document).ready(function () {
     angular.bootstrap(document, ['app']);
 });
+
 
 

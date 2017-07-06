@@ -173,3 +173,42 @@ td.show .bt-col-editable .glyphicon {
     -ms-user-select: none;
     user-select: none;
 }
+
+
+/* login start */
+.login-container-wrap{
+    height: 100%;
+    width: 100%;
+    padding-top: 100px;
+    background-color: #ddd;
+}
+.login-content{
+    width: 400px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+}
+.register-now {
+    margin-top: 7px;
+    position: absolute;
+    right: 15px;
+    cursor: pointer;
+}
+.validate-code {
+    width: 40%;
+    margin-left: 10%;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.validate-code, .validate-code span {
+    display: inline-block;
+    height: 34px;
+    line-height: 34px;
+}
+
+/* login end */
