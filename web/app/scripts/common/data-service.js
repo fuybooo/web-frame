@@ -8,8 +8,8 @@ angular.module('app').factory('dataService', function ($http, $injector, baseReq
         test: 'test.json', // 测试数据，与后端联调时关闭
         // test: 'test' // 真实路径，与后端联调时打开
 
-        // user: 'user.json',
-        user: 'user'
+        user: 'user.json'
+        // user: 'user'
     };
     /**
      * 请求资源

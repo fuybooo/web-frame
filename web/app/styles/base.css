@@ -483,7 +483,9 @@ ul[class^="cr"] li h6 {
 .h400 {
     height: 400px;
 }
-
+.max-h400{
+    max-height: 400px;
+}
 .h600 {
     height: 600px;
 }

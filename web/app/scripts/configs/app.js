@@ -1,3 +1,7 @@
+// 设置国际化
+$.extend($.fn.bootstrapTable.defaults, $.fn.bootstrapTable.locales['zh-CN']);
+
+
 var host = '127.0.0.1';// 本地使用的ip
 // var host = '47.94.0.247';// 服务器上的ip
 var port = 3003;
