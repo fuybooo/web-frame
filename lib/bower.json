@@ -27,7 +27,7 @@
     "bootstrap-datetimepicker": "^0.0.11",
     "angular-async-loader": "https://github.com/subchen/angular-async-loader.git#^1.3.2",
     "angular-ui-load": "^1.0.0",
-    "angular-ui-router": "^1.0.4",
+    "angular-ui-router": "^1.0.5",
     "angular-animate": "^1.6.4",
     "angular-sanitize": "^1.6.4",
     "angular-touch": "^1.6.4",
