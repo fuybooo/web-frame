@@ -19,20 +19,23 @@ angular.module('app').factory('commonService', function ($timeout, $compile, $tr
      */
     service.SESSION = {
         userInfo: 'userInfo',
-        localLanguage: 'localLanguage'
+        localLanguage: 'localLanguage',
+        isValidateCodeShow: 'isValidateCodeShow'
     };
     /**
      * 所有的事件
      */
     service.EVENT = {
-        login: 'login'
+        login: 'login',
+        ngRepeatFinished: 'ngRepeatFinished'
     };
     /**
      * 所有的事件的值
      */
     service.EVENT_KEY = {
         success: 'success',
-        logout: 'logout'
+        logout: 'logout',
+        nav: 'nav'
     };
     /**
      * 所有状态
@@ -177,7 +180,7 @@ angular.module('app').factory('commonService', function ($timeout, $compile, $tr
                 code_i + '</span>';
         }
         service.validateCode = code;
-        return '<span class="validate-code" title="换一张" ng-click="refreshValidateCode($event)">' + code_span + '</span>';
+        return '<span class="validate-code" title="换一张">' + code_span + '</span>';
     };
 
     /**

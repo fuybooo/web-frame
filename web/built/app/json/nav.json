@@ -1,0 +1,143 @@
+[
+  {
+    "name": "告警板",
+    "sref": "app.alertBoard",
+    "isParent": false
+  },
+  {
+    "name": "仪表板",
+    "sref": "app.dashboard",
+    "isParent": false
+  },
+  {
+    "name": "设备管理",
+    "sref": "app.device",
+    "isParent": true,
+    "childList": [
+      {
+        "name": "设备管理",
+        "sref": "app.device"
+      },
+      {
+        "name": "设备分组",
+        "sref": "app.deviceGroup"
+      }
+    ]
+  },
+  {
+    "name": "用户管理",
+    "sref": "app.user",
+    "isParent": true,
+    "childList": [
+      {
+        "name": "用户",
+        "sref": "app.user"
+      },
+      {
+        "name": "用户组",
+        "sref": "app.userGroup"
+      },
+      {
+        "name": "部门",
+        "sref": "app.userDept"
+      }
+    ]
+  },
+  {
+    "name": "应用管理",
+    "sref": "app.application",
+    "isParent": true,
+    "childList": [
+      {
+        "name": "应用列表",
+        "sref": "app.application"
+      },
+      {
+        "name": "应用分类",
+        "sref": "app.applicationFamily"
+      }
+    ]
+  },
+  {
+    "name": "策略管理",
+    "sref": "app.policy",
+    "isParent": true,
+    "childList": [
+      {
+        "name": "策略列表",
+        "sref": "app.policy"
+      },
+      {
+        "name": "默认策略",
+        "sref": "app.policyDefault"
+      },
+      {
+        "name": "违规策略",
+        "sref": "app.policyViolation"
+      }
+    ]
+  },
+  {
+    "name": "推送管理",
+    "sref": "app.push",
+    "isParent": false
+  },
+  {
+    "name": "内容管理",
+    "sref": "app.content",
+    "isParent": true,
+    "childList": [
+      {
+        "name": "文件列表",
+        "sref": "app.content"
+      },
+      {
+        "name": "文件分类",
+        "sref": "app.contentFamily"
+      }
+    ]
+  },
+  {
+    "name": "设置",
+    "sref": "app.mgrSetting",
+    "isParent": true,
+    "childList": [
+      {
+        "name": "管理员",
+        "sref": "app.settingMgr"
+      },
+      {
+        "name": "角色",
+        "sref": "app.settingRole"
+      },
+      {
+        "name": "LDAP/AD数据导入",
+        "sref": "app.settingImport"
+      },
+      {
+        "name": "用户协议",
+        "sref": "app.settingProtocol"
+      },
+      {
+        "name": "EMM客户端版本管理",
+        "sref": "app.settingVersion"
+      },
+      {
+        "name": "数据、锁屏和离线等配置",
+        "sref": "app.settingData"
+      },
+      {
+        "name": "序列号版本信息",
+        "sref": "app.settingSerial"
+      },
+      {
+        "name": "日志",
+        "sref": "app.settingLog"
+      },
+      {
+        "name": "LOGO",
+        "sref": "app.settingLogo"
+      }
+    ]
+  }
+]

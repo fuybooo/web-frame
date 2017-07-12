@@ -104,31 +104,45 @@ td.show .bt-col-editable .glyphicon {
 }
 
 /* 使用字体图标 */
-.common-icon::before{
+.common-icon{
+    position: relative;
+}
+.common-icon::before
+{
     display: inline-block;
     font-family: "FontAwesome";
     font-weight: normal;
     font-style: normal;
     vertical-align: baseline;
-    line-height:1;
+    position: absolute;
 }
-.common-icon-reply::before{
+.common-icon-reply::before
+{
     content: '\f112';
 }
-.common-icon-share::before{
+.common-icon-share::before
+{
     content: '\f064';
 }
-.common-icon-thumb::before{
+.common-icon-thumb::before
+{
     content: '\f164';
 }
-.common-icon-report::before{
+.common-icon-report::before
+{
     content: '\f12a';
 }
-.common-icon-trash::before{
+.common-icon-trash::before
+{
     content: '\f1f8';
 }
-.common-icon-down::before{
+.common-icon-down::before
+{
     content: '\f107';
+}
+.common-icon-caret-down::before
+{
+    content: '\f0d7';
 }
 
 /* custom-select */
@@ -174,20 +188,220 @@ td.show .bt-col-editable .glyphicon {
     user-select: none;
 }
 
+/* 根据项目需求新增的统一样式 start */
+
+/* 主要的按钮 */
+/* 页面上带有主题色的按钮 02B095 */
+
+.btn-main {
+    color: #fff;
+    background-color: #02B095;
+    border-color: #02A58C;
+}
+.btn-main:focus,
+.btn-main.focus {
+    color: #fff;
+    background-color: #029E86;
+    border-color: #029780;
+}
+.btn-main:hover {
+    color: #fff;
+    background-color: #029E86;
+    border-color: #02957E;
+}
+.btn-main:active,
+.btn-main.active,
+.open > .dropdown-toggle.btn-main {
+    color: #fff;
+    background-color: #029E86;
+    border-color: #02957E;
+}
+.btn-main:active:hover,
+.btn-main.active:hover,
+.open > .dropdown-toggle.btn-main:hover,
+.btn-main:active:focus,
+.btn-main.active:focus,
+.open > .dropdown-toggle.btn-main:focus,
+.btn-main:active.focus,
+.btn-main.active.focus,
+.open > .dropdown-toggle.btn-main.focus {
+    color: #fff;
+    background-color: #02957E;
+    border-color: #029780;
+}
+.btn-main:active,
+.btn-main.active,
+.open > .dropdown-toggle.btn-main {
+    background-image: none;
+}
+.btn-main.disabled:hover,
+.btn-main[disabled]:hover,
+fieldset[disabled] .btn-main:hover,
+.btn-main.disabled:focus,
+.btn-main[disabled]:focus,
+fieldset[disabled] .btn-main:focus,
+.btn-main.disabled.focus,
+.btn-main[disabled].focus,
+fieldset[disabled] .btn-main.focus {
+    background-color: #02B095;
+    border-color: #02A58C;
+}
+/* 页面上普通的按钮 */
+/* 背景色为白色，鼠标经过时改变字体颜色和边框颜色 */
+.btn-normal {
+    color: #5d5d5d;
+    background-color: #fff;
+    border-color: #c3c3c3;
+}
+.btn-normal:focus,
+.btn-normal.focus {
+    color: #02B095;
+    background-color: #fff;
+    border-color: #029780;
+}
+.btn-normal:hover {
+    color: #02B095;
+    background-color: #fff;
+    border-color: #02957E;
+}
+.btn-normal.disabled:hover,
+.btn-normal[disabled]:hover,
+fieldset[disabled] .btn-normal:hover,
+.btn-normal.disabled:focus,
+.btn-normal[disabled]:focus,
+fieldset[disabled] .btn-normal:focus,
+.btn-normal.disabled.focus,
+.btn-normal[disabled].focus,
+fieldset[disabled] .btn-normal.focus {
+    background-color: #fff;
+    border-color: #02A58C;
+}
+
+/* 背景色为白色，鼠标经过时为填充色 */
+.btn-major {
+    color: #5d5d5d;
+    background-color: #fff;
+    border-color: #c3c3c3;
+}
+.btn-major:focus,
+.btn-major.focus {
+    color: #fff;
+    background-color: #02B095;
+    border-color: #029780;
+}
+.btn-major:hover {
+    color: #fff;
+    background-color: #02B095;
+    border-color: #02957E;
+}
+.btn-major.disabled:hover,
+.btn-major[disabled]:hover,
+fieldset[disabled] .btn-major:hover,
+.btn-major.disabled:focus,
+.btn-major[disabled]:focus,
+fieldset[disabled] .btn-major:focus,
+.btn-major.disabled.focus,
+.btn-major[disabled].focus,
+fieldset[disabled] .btn-major.focus {
+    color: #fff;
+    background-color: #02B095;
+    border-color: #02A58C;
+}
+.btn.btn-active,
+.btn.btn-active:hover{
+    color: #fff;
+    background-color: #02B095;
+    border-color: #02957E;
+}
+
+
+/* 根据项目需求新增的统一样式 end */
+
+
+/* loading start */
+
+.index-loading{
+    height: 30px;
+    width: 540px;
+    margin: auto;
+    margin-top: 170px;
+    font-size: 72px;
+    color: #02B095;
+}
+
+.index-loading span{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border-radius: 50%;
+    background-color: #02B095;
+    animation:load 1.5s ease infinite;
+}
+.index-loading span:last-child{
+    margin-right: 0;
+}
+@keyframes load {
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: .1;
+    }
+}
+.index-loading span:nth-child(1){
+    animation-delay:0.3s;
+}
+.index-loading span:nth-child(2){
+    animation-delay:0.6s;
+}
+.index-loading span:nth-child(3){
+    animation-delay:0.9s;
+}
+.index-loading span:nth-child(4){
+    animation-delay:1.2s;
+}
+.index-loading span:nth-child(5){
+    animation-delay:1.5s;
+}
+
+/* loading end */
+
+/* common start */
+.container-wrap{
+    width: 100%;
+    height: 100%;
+}
+/* common end */
 
 /* login start */
 .login-container-wrap{
-    height: 100%;
-    width: 100%;
-    padding-top: 100px;
-    background-color: #ddd;
+    padding-top: 10%;
+    background: url('../images/bg.png') no-repeat;
 }
 .login-content{
-    width: 400px;
+    width: 1000px;
     margin: 0 auto;
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
+}
+.login-form{
+    width: 520px;
+    margin: auto;
+}
+.login-form .form-group{
+    margin-bottom: 30px;
+}
+.login-logo{
+    background: url("../images/login_logo.png") no-repeat;
+    width: 102px;
+    height: 102px;
+    margin: auto;
+}
+.login-title{
+    text-align: center;
+    margin-bottom: 30px;
 }
 .register-now {
     margin-top: 7px;
@@ -210,5 +424,106 @@ td.show .bt-col-editable .glyphicon {
     height: 34px;
     line-height: 34px;
 }
+.login-footer{
+    text-align: center;
+}
 
 /* login end */
+
+/* app-nav start */
+.app-nav-container-wrap{
+    height: 70px;
+    background-color: #02B095;
+}
+.app-nav-container{
+    height: 100%;
+    width: 1200px;
+    margin: auto;
+}
+.app-nav-part{
+    height: 100%;
+    float: left;
+}
+.app-nav-logo{
+    width: 190px;
+    background: url("../images/logo.png") no-repeat center;
+}
+.app-nav-content{
+    width: 860px;
+    margin-bottom: 0; /* 覆盖默认的样式 */
+}
+.app-nav-item{
+    float: left;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 70px;
+    line-height:70px;
+    color: #fff;
+    cursor: pointer;
+}
+.app-nav-item:hover{
+    color: #02B095;
+    background-color: #fff;
+}
+
+.app-nav-item > .is-parent::before{
+    right: -13px;
+    content: '\f0d7';
+}
+
+.app-nav-user{
+    width: 150px;
+    height: 70px;
+    line-height:70px;
+    padding-left: 20px;
+    text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: #fff;
+    cursor: pointer;
+}
+.app-nav-user:hover{
+    color: #b0e0d9;
+}
+
+.app-nav-child-list{
+    min-width: 100%;
+    position: absolute;
+    display: none;
+    padding-top: 10px;
+    padding-bottom: 15px;
+}
+.hover .app-nav-child-list{
+    display: block;
+}
+.app-nav-child-item{
+    color: #848484;
+    height: 28px;
+    line-height: 28px;
+    text-align: left;
+    padding-left: 20px;
+    padding-right: 20px;
+    white-space: nowrap;
+    background-color: #fff;
+}
+.app-nav-item .app-nav-child-item:hover{
+    color: #02B095;
+    background-color: #eee;
+}
+.active .app-nav-space{
+    width: 100%;
+    height: 10px;
+    position: absolute;
+    background-color: #fff;
+    top: 60px;
+}
+.app-nav-user-menu{
+    display: none;
+}
+.hover .app-nav-user-menu{
+    display: block;
+}
+/* app-nav end */

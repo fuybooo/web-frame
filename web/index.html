@@ -64,11 +64,23 @@
 
         <!--各模块资源 开发过程中，直接依次引入新增的文件即可，部署时会在任务中引入-->
         <script src="app/scripts/login/login-controller.js"></script>
-        <script src="app/scripts/home/landing-controller.js"></script>
+        <script src="app/scripts/nav/nav-directive.js"></script>
+        <script src="app/scripts/dashboard/dashboard-controller.js"></script>
+        <script src="app/scripts/device/device-controller.js"></script>
+        <script src="app/scripts/device/device-group-controller.js"></script>
 
 
     </head>
     <body class="w h">
-        <div ui-view class="w h"></div>
+        <div ui-view class="w h">
+            <div class="index-loading">
+                <label>Loading</label>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
     </body>
 </html>

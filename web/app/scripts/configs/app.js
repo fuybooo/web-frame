@@ -4,30 +4,57 @@ var port = 3003;
 var wsPort = 3004;
 angular.module('templates', []);
 angular.module('app', ['ui.router', 'ui.load', 'ngSanitize', 'ngAnimate', 'ngTouch', 'pascalprecht.translate'/* 国际化 */, 'templates'])
-    .run(function ($state, $stateParams, $rootScope, $anchorScroll, dataService) {
-        $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-        });
+    .run(function ($state, $stateParams, $rootScope, $anchorScroll, dataService, lang, routers) {
+
         $rootScope.$on('$locationChangeStart', function (evt, current, prev) {
-            console.log('$locationChangeStart',arguments)
+            // 根据current获取对应的state
+            var currentState;
+            var symbolIndex_1 =current.indexOf('#!');
+            if(symbolIndex_1 === -1){
+                currentState = routers.login;
+            }else{
+                var symbolIndex_2 = current.indexOf('?');
+                // 从#!/中的/后的第一个字符开始截取:如 http://localhost:3000/#!/app/dashboard 截取完成是app/dashboard
+                var anchor = current.slice(symbolIndex_1 + 3, symbolIndex_2 === -1 ? current.length : symbolIndex_2);
+                currentState = anchor.split('/').join('.');
+            }
+            // 对错误的锚点进行处理
+            // 不能为抽象路径, 不能为router之外的
+            if(currentState === 'app' || !(currentState in routers)){
+                console.error('错误的路径！');
+            }
+
             // 为了防止用户在已经登录系统的情况下再次进入登录界面,需要在用户跳转到登录界面时判断后台是否存在用户的session信息
             // 如果存在,则直接进入登录后的界面,否则停留在登录界面.
-            var path = 'http://localhost:3000';
-            if(current === path || current === path + '/'){
-                dataService.get(dataService.URL.hasSession, function(data){
-                    if(data.code === 0){
+            if (currentState === routers.login) {
+                dataService.get(dataService.URL.hasSession, function (data) {
+                    if (data.code === 0) {
                         // 说明后台已经有session了
                         $state.go('home.landing');
                     }
                 });
             }
         });
-        $rootScope.$on('$viewContentLoaded', function () {
+        $rootScope.$on('$viewContentLoaded', function (evt, viewConfig) {
+            var currentState = $state.current.name;
+            // 执行次数为当前页面中ui-view指令的个数，为了减少执行次数，需要做判断
+            // 判断该视图是非抽象视图且不是导航栏视图
+            if (viewConfig) {
+                if (viewConfig.viewDecl.templateUrl.indexOf('/app.html') !== -1) {
+                    // 导航栏加载完成之后，激活当前导航栏
+
+                } else {
+                    // 页面加载完成之后显示标题
+                    $rootScope.pageTitle = lang.title[currentState];
+                }
+            }
+
         });
 
     })
     // 拦截器
     .factory('httpInterceptor', ['$q', '$injector', function ($q, $injector) {
-        var interceptor = {
+        return {
             request: function (config) {
                 // 在每次发送请求之前拦截，可以进行权限判断，或者参数处理等
                 // 处理成功返回config，处理失败返回false，并提示处理结果
@@ -49,7 +76,6 @@ angular.module('app', ['ui.router', 'ui.load', 'ngSanitize', 'ngAnimate', 'ngTou
                 return response;
             }
         };
-        return interceptor;
     }])
     //配置APP
     .config(function ($httpProvider, $translateProvider) {
@@ -91,8 +117,6 @@ angular.module('app', ['ui.router', 'ui.load', 'ngSanitize', 'ngAnimate', 'ngTou
             return query.length ? query.substr(0, query.length - 1) : query;
         };
 
-        //一个function数组，负责将请求的body，也就是post data，转换成想要的形式
-        // Override $http service's default transformRequest
         $httpProvider.defaults.transformRequest = [function (data) {
             if (String(data) === '[object FormData]')return data;
             return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;

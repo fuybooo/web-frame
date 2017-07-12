@@ -1,0 +1,24 @@
+<div class="container-wrap app-nav-container-wrap">
+    <div class="app-nav-container">
+        <div class="app-nav-part app-nav-logo"></div>
+        <ul class="app-nav-part app-nav-content">
+            <li class="app-nav-item" ng-repeat="navItem in navList" repeat-finish="nav" data-sref="{{navItem.sref}}" ng-class="{hover: appNavIsHover}" ng-mouseenter="appNavIsHover=true" ng-mouseleave="appNavIsHover=false">
+                <span class="common-icon" ng-class="{'is-parent': navItem.isParent}">{{navItem.name}}</span>
+                <div class="app-nav-space"></div>
+                <ul class="app-nav-child-list" ng-if="navItem.isParent">
+                    <li class="app-nav-child-item" ng-repeat="navChildItem in navItem.childList" data-sref="{{navChildItem.sref}}">
+                        <span>{{navChildItem.name}}</span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div class="app-nav-part app-nav-user" ng-class="{hover: appNavUserIsHover}" ng-mouseenter="appNavUserIsHover=true" ng-mouseleave="appNavUserIsHover=false">
+            <span class="glyphicon glyphicon-user"></span>
+            <span class="app-nav-user-name" ng-bind="userName" title="{{userName}}"></span>
+            <ul class="app-nav-user-menu">
+                <li class="app-nav-user-menu-item"><span class="glyphicon glyphicon-pencil"></span>修改资料</li>
+                <li class="app-nav-user-menu-item"><span class="glyphicon glyphicon-log-out"></span>注销</li>
+            </ul>
+        </div>
+    </div>
+</div>

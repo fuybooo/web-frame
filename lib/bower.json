@@ -34,6 +34,7 @@
     "angular-translate": "^2.15.2",
     "angular-ueditor": "*",
     "angular-translate-loader-static-files": "^2.15.2",
-    "requirejs": "^2.3.3"
+    "requirejs": "^2.3.3",
+    "amazeui": "^2.7.2"
   }
 }

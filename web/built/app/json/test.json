@@ -1,21 +1,4 @@
 {
   "code": 0,
-  "msg": "请求成功！",
-  "data": [
-    {
-      "id": "lk2sd233we2ks-wl3lks2kd2fe-233lk",
-      "name": "device",
-      "code": "001001"
-    },
-    {
-      "id": "lk2sd23we2ks-wl3lks2kd2fe-233lk",
-      "name": "device",
-      "code": "001002"
-    },
-    {
-      "id": "lk2sd33we2ks-wl3lks2kd2fe-233lk",
-      "name": "device",
-      "code": "001003"
-    }
-  ]
+  "msg": "请求成功！"
 }

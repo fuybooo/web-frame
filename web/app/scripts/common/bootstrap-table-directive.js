@@ -66,7 +66,6 @@ angular.module('app')
                     var delta = contentHeight - wrapHeight - scrollTop;
                     if (delta - MIN_HEIGHT <= 0) {
                         // 加载下一页数据
-                        console.log('isTrigger:', isTrigger);
                         if (isTrigger) {
                             lastScrollTop = scrollTop;
                             pageNumber++;
