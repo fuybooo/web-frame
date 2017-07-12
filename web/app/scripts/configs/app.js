@@ -36,17 +36,11 @@ angular.module('app', ['ui.router', 'ui.load', 'ngSanitize', 'ngAnimate', 'ngTou
             }
         });
         $rootScope.$on('$viewContentLoaded', function (evt, viewConfig) {
-            var currentState = $state.current.name;
             // 执行次数为当前页面中ui-view指令的个数，为了减少执行次数，需要做判断
             // 判断该视图是非抽象视图且不是导航栏视图
-            if (viewConfig) {
-                if (viewConfig.viewDecl.templateUrl.indexOf('/app.html') !== -1) {
-                    // 导航栏加载完成之后，激活当前导航栏
-
-                } else {
-                    // 页面加载完成之后显示标题
-                    $rootScope.pageTitle = lang.title[currentState];
-                }
+            if (viewConfig && viewConfig.viewDecl.templateUrl.indexOf('/app.html') === -1) {
+                // 页面加载完成之后显示标题
+                $rootScope.pageTitle = lang[$state.current.name];
             }
 
         });

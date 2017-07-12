@@ -488,7 +488,11 @@ ul[class^="cr"] li h6 {
     height: 600px;
 }
 
-.min-h1000 {
+.min-h400 {
+    min-height: 400px;
+}
+
+.min-h600 {
     min-height: 600px;
 }
 

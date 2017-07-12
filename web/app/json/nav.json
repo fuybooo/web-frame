@@ -1,141 +1,142 @@
 [
   {
-    "name": "告警板",
+    "_comment": "name表示国际化的key,sref表示router中的state",
+    "name": "app.alertBoard",
     "sref": "app.alertBoard",
     "isParent": false
   },
   {
-    "name": "仪表板",
+    "name": "app.dashboard",
     "sref": "app.dashboard",
     "isParent": false
   },
   {
-    "name": "设备管理",
+    "name": "app.device",
     "sref": "app.device",
     "isParent": true,
     "childList": [
       {
-        "name": "设备管理",
+        "name": "app.device",
         "sref": "app.device"
       },
       {
-        "name": "设备分组",
+        "name": "app.deviceGroup",
         "sref": "app.deviceGroup"
       }
     ]
   },
   {
-    "name": "用户管理",
+    "name": "app._user",
     "sref": "app.user",
     "isParent": true,
     "childList": [
       {
-        "name": "用户",
+        "name": "app.user",
         "sref": "app.user"
       },
       {
-        "name": "用户组",
+        "name": "app.userGroup",
         "sref": "app.userGroup"
       },
       {
-        "name": "部门",
+        "name": "app.userDept",
         "sref": "app.userDept"
       }
     ]
   },
   {
-    "name": "应用管理",
+    "name": "app._application",
     "sref": "app.application",
     "isParent": true,
     "childList": [
       {
-        "name": "应用列表",
+        "name": "app.application",
         "sref": "app.application"
       },
       {
-        "name": "应用分类",
+        "name": "app.applicationFamily",
         "sref": "app.applicationFamily"
       }
     ]
   },
   {
-    "name": "策略管理",
+    "name": "app._policy",
     "sref": "app.policy",
     "isParent": true,
     "childList": [
       {
-        "name": "策略列表",
+        "name": "app.policy",
         "sref": "app.policy"
       },
       {
-        "name": "默认策略",
+        "name": "app.policyDefault",
         "sref": "app.policyDefault"
       },
       {
-        "name": "违规策略",
+        "name": "app.policyViolation",
         "sref": "app.policyViolation"
       }
     ]
   },
   {
-    "name": "推送管理",
+    "name": "app.push",
     "sref": "app.push",
     "isParent": false
   },
   {
-    "name": "内容管理",
+    "name": "app._content",
     "sref": "app.content",
     "isParent": true,
     "childList": [
       {
-        "name": "文件列表",
+        "name": "app.content",
         "sref": "app.content"
       },
       {
-        "name": "文件分类",
+        "name": "app.contentFamily",
         "sref": "app.contentFamily"
       }
     ]
   },
   {
-    "name": "设置",
-    "sref": "app.mgrSetting",
+    "name": "app._setting",
+    "sref": "app.settingMgr",
     "isParent": true,
     "childList": [
       {
-        "name": "管理员",
+        "name": "app.settingMgr",
         "sref": "app.settingMgr"
       },
       {
-        "name": "角色",
+        "name": "app.settingRole",
         "sref": "app.settingRole"
       },
       {
-        "name": "LDAP/AD数据导入",
+        "name": "app.settingImport",
         "sref": "app.settingImport"
       },
       {
-        "name": "用户协议",
+        "name": "app.settingProtocol",
         "sref": "app.settingProtocol"
       },
       {
-        "name": "EMM客户端版本管理",
+        "name": "app.settingVersion",
         "sref": "app.settingVersion"
       },
       {
-        "name": "数据、锁屏和离线等配置",
+        "name": "app.settingData",
         "sref": "app.settingData"
       },
       {
-        "name": "序列号版本信息",
+        "name": "app.settingSerial",
         "sref": "app.settingSerial"
       },
       {
-        "name": "日志",
+        "name": "app.settingLog",
         "sref": "app.settingLog"
       },
       {
-        "name": "LOGO",
+        "name": "app.settingLogo",
         "sref": "app.settingLogo"
       }
     ]

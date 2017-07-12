@@ -1,7 +1,7 @@
 angular.module('app').directive('appNav', function (commonService, dataService, $state) {
     'use strict';
     return {
-        templateUrl: 'app/views/app-nav.html',
+        templateUrl: 'app/views/nav.html',
         controller: function($scope){
             // 获取导航栏数据
             dataService.get(dataService.URL.nav, function(data){

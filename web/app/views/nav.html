@@ -3,11 +3,11 @@
         <div class="app-nav-part app-nav-logo"></div>
         <ul class="app-nav-part app-nav-content">
             <li class="app-nav-item" ng-repeat="navItem in navList" repeat-finish="nav" data-sref="{{navItem.sref}}" ng-class="{hover: appNavIsHover}" ng-mouseenter="appNavIsHover=true" ng-mouseleave="appNavIsHover=false">
-                <span class="common-icon" ng-class="{'is-parent': navItem.isParent}">{{navItem.name}}</span>
+                <span class="common-icon" ng-class="{'is-parent': navItem.isParent}">{{navItem.name | tl}}</span>
                 <div class="app-nav-space"></div>
                 <ul class="app-nav-child-list" ng-if="navItem.isParent">
                     <li class="app-nav-child-item" ng-repeat="navChildItem in navItem.childList" data-sref="{{navChildItem.sref}}">
-                        <span>{{navChildItem.name}}</span>
+                        <span>{{navChildItem.name | tl}}</span>
                     </li>
                 </ul>
             </li>
