@@ -4,7 +4,7 @@ var port = 3003;
 var wsPort = 3004;
 angular.module('templates', []);
 angular.module('app', ['ui.router', 'ui.load', 'ngSanitize', 'ngAnimate', 'ngTouch', 'pascalprecht.translate'/* 国际化 */, 'templates'])
-    .run(function ($state, $stateParams, $rootScope, $anchorScroll, dataService, lang, routers) {
+    .run(function ($state, $stateParams, $rootScope, $anchorScroll, $compile, dataService, lang, routers) {
 
         $rootScope.$on('$locationChangeStart', function (evt, current, prev) {
             // 根据current获取对应的state
@@ -40,7 +40,35 @@ angular.module('app', ['ui.router', 'ui.load', 'ngSanitize', 'ngAnimate', 'ngTou
             // 判断该视图是非抽象视图且不是导航栏视图
             if (viewConfig && viewConfig.viewDecl.templateUrl.indexOf('/app.html') === -1) {
                 // 页面加载完成之后显示标题
-                $rootScope.pageTitle = lang[$state.current.name];
+                var state = $state.current.name;
+                $rootScope.pageTitle = lang[state];
+
+                // 显示当前位置
+                var currentPlace = '<a class="theme-link js-to-index">首页</a>';
+                if(state !== 'app.dashboard'){
+                    currentPlace += '<span class="pl5 pri5 c-333">&gt;&gt;</span><span class="c-333">' + lang[state] + '</span>';
+                }
+                $rootScope.currentPlace = currentPlace;
+                $('.js-app-current-place').off('click.currentPlace').on('click.currentPlace', '.js-to-index', function(){
+                    $state.go('app.dashboard');
+                });
+
+                // 激活当前导航栏
+                var $navLi = $('.app-nav-content').find('li').removeClass('active');
+                $navLi.each(function () {
+                    var sref = $(this).attr('data-sref');
+                    if (sref === $state.current.name) {
+                        var target;
+                        if ($(this).hasClass('app-nav-item')) {
+                            target = $(this);
+                        } else {
+                            $navLi.filter('.app-nav-child-item').removeClass('active');
+                            $(this).addClass('active');
+                            target = $(this).parent().parent();
+                        }
+                        target.addClass('active');
+                    }
+                });
             }
 
         });

@@ -72,6 +72,10 @@ textarea.ng-dirty.ng-invalid:focus {
     color: #555;
 }
 
+.c-333 {
+    color: #333;
+}
+
 /* cursor */
 .cp {
     cursor: pointer;
@@ -490,6 +494,10 @@ ul[class^="cr"] li h6 {
 
 .min-h400 {
     min-height: 400px;
+}
+
+.min-h530 {
+    min-height: 530px;
 }
 
 .min-h600 {

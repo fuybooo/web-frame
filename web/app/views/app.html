@@ -1,2 +1,9 @@
-<div app-nav>导航部分</div>
-<div ui-view>内容部分</div>
+<!--导航部分： 高70px-->
+<div app-nav></div>
+<!--内容部分：最小高530px-->
+<div class="app-content">
+    <!--当前位置-->
+    <div class="app-current-place js-app-current-place" ng-bind-html="currentPlace"></div>
+    <!--页面部分-->
+    <div ui-view></div>
+</div>

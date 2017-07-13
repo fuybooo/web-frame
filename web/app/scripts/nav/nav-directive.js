@@ -36,6 +36,8 @@ angular.module('app').directive('appNav', function (commonService, dataService, 
                             if ($(this).hasClass('app-nav-item')) {
                                 target = $(this);
                             } else {
+                                $navLi.filter('.app-nav-child-item').removeClass('active');
+                                $(this).addClass('active');
                                 target = $(this).parent().parent();
                             }
                             target.addClass('active');
@@ -46,19 +48,23 @@ angular.module('app').directive('appNav', function (commonService, dataService, 
                     $navLi.off('click.nav').on('click.nav', function(e){
                         e.stopPropagation();
                         var sref = $(this).attr('data-sref');
+                        var target;
+                        if($(this).hasClass('app-nav-item')){
+                            target = $(this);
+                        }else{
+                            $navLi.filter('.app-nav-child-item').removeClass('active');
+                            $(this).addClass('active');
+                            target = $(this).parent().parent();
+                        }
                         if($state.current.name === sref){
+                            target.removeClass('hover');
                             return false;
                         }
                         // 进行页面跳转
                         $state.go(sref);
                         // 状态设置
                         $navLi.removeClass('active');
-                        var target;
-                        if($(this).hasClass('app-nav-item')){
-                            target = $(this);
-                        }else{
-                            target = $(this).parent().parent();
-                        }
+
                         target.addClass('active').removeClass('hover');
                     });
 

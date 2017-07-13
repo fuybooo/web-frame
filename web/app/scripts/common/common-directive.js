@@ -728,18 +728,19 @@ angular.module('app')
             }
         };
     })
-    .directive('repeatFinish', function($timeout, commonService){
-        return{
+    .directive('repeatFinish', function ($timeout, commonService) {
+        return {
             scope: {
                 repeatFinish: '@'
             },
-            link: function(scope){
-                if(scope.$parent.$last){
-                    $timeout(function(){
+            link: function (scope) {
+                if (scope.$parent.$last) {
+                    $timeout(function () {
                         scope.$emit(commonService.EVENT.ngRepeatFinished, scope.repeatFinish);
                     });
                 }
             }
         };
     })
+
 ;
