@@ -1,0 +1,122 @@
+<div class="row mt10">
+    <div class="col-lg-6 pri10" ng-show="dashConfig.deviceCount">
+        <div class="dash-box">
+            <div class="h40">
+                <span class="little-strip"></span>
+                <span class="lh34">设备总数</span>
+                <span class="fr">
+                    <button class="btn btn-normal">查看详情</button>
+                    <button class="btn btn-normal ml10">导出数据</button>
+                </span>
+            </div>
+            <div class="dash-box-content">
+                <span ng-bind="summary.devices"></span><i class="dash-box-img dash-box-img-device"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 pl10" ng-show="dashConfig.userCount">
+        <div class="dash-box">
+            <div class="h40">
+                <span class="little-strip"></span>
+                <span class="lh34">用户总数</span>
+                <span class="fr">
+                    <button class="btn btn-normal">查看详情</button>
+                    <button class="btn btn-normal ml10">导出数据</button>
+                </span>
+            </div>
+            <div class="dash-box-content">
+                <span ng-bind="summary.users"></span><i class="dash-box-img dash-box-img-user"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mt10" ng-show="dashConfig.deviceViolation">
+    <div class="col-lg-12">
+        <div class="dash-box h300i">
+            <div class="h40">
+                <span class="little-strip"></span>
+                <span class="lh34">违规设备</span>
+                <span class="dif fr">
+                    <input type="text" class="form-control dib w120 js-dash-device-date js-dash-device-date-start" placeholder="开始时间">
+                    <span class="lh34 ml10">-</span>
+                    <input type="text" class="form-control dib w120 ml10 js-dash-device-date js-dash-device-date-end" placeholder="结束时间">
+                    <button class="btn btn-normal ml10">查看详情</button>
+                    <button class="btn btn-normal ml10">导出数据</button>
+                </span>
+            </div>
+            <div class="h260" id="violation-device-chart"></div>
+        </div>
+    </div>
+</div>
+<div class="row mt10" ng-show="dashConfig.deviceState">
+    <div class="col-lg-12">
+        <div class="dash-box h300i">
+            <div class="h40">
+                <span class="little-strip"></span>
+                <span class="lh34">设备状态</span>
+                <span class="dif fr">
+                    <button class="btn btn-normal">导出数据</button>
+                </span>
+            </div>
+            <div class="h260" id="device-state-chart"></div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt10">
+    <div class="col-lg-6 pri10" ng-show="dashConfig.deviceModel">
+        <div class="dash-box h300i">
+            <div class="h40">
+                <span class="little-strip"></span>
+                <span class="lh34">设备型号</span>
+                <span class="fr">
+                    <button class="btn btn-normal">导出数据</button>
+                </span>
+            </div>
+            <div class="h260" id="device-model-chart"></div>
+        </div>
+    </div>
+    <div class="col-lg-6 pl10" ng-show="dashConfig.deviceSystem">
+        <div class="dash-box h300i">
+            <div class="h40">
+                <span class="little-strip"></span>
+                <span class="lh34">操作系统</span>
+                <span class="fr">
+                    <button class="btn btn-normal">导出数据</button>
+                </span>
+            </div>
+            <div class="h260" id="device-system-chart"></div>
+        </div>
+    </div>
+    <div class="col-lg-6 pri10" ng-show="dashConfig.deviceAndroidVersion" ng-class="{mt10: dashChartsGroup.indexOf('deviceAndroidVersion') > 1}">
+        <div class="dash-box h300i">
+            <div class="h40">
+                <span class="little-strip"></span>
+                <span class="lh34">安卓系统版本</span>
+            </div>
+            <div class="h260" id="device-android-version-chart"></div>
+        </div>
+    </div>
+    <div class="col-lg-6 pl10" ng-show="dashConfig.deviceIosVersion" ng-class="{mt10: dashChartsGroup.indexOf('deviceIosVersion') > 1}">
+        <div class="dash-box h300i">
+            <div class="h40">
+                <span class="little-strip"></span>
+                <span class="lh34">IOS系统版本</span>
+            </div>
+            <div class="h260" id="device-ios-version-chart"></div>
+        </div>
+    </div>
+</div>
+<div class="dash-config">
+    <i class="dash-config-img"></i>
+    <ul class="dash-config-list dn">
+        <li class="dash-config-item checkbox"><input type="checkbox">设备总数</li>
+        <li class="dash-config-item checkbox"><input type="checkbox">用户总数</li>
+        <li class="dash-config-item checkbox"><input type="checkbox">违规设备</li>
+        <li class="dash-config-item checkbox"><input type="checkbox">设备状态</li>
+        <li class="dash-config-item checkbox"><input type="checkbox">设备型号</li>
+        <li class="dash-config-item checkbox"><input type="checkbox">操作系统</li>
+        <li class="dash-config-item checkbox"><input type="checkbox">安卓系统版本</li>
+        <li class="dash-config-item checkbox"><input type="checkbox">IOS系统版本</li>
+    </ul>
+</div>

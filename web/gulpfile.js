@@ -10,10 +10,10 @@ var gulp = require('gulp'),
 gulp.task('style', function () {
     "use strict";
     return gulp.src([
-        // 按顺序加载所有用到的css，如果有新增的css文件，必须放到这里
+        // 按顺序加载所有用到的css，如果有新增的css文件，必须在这里添加
         'app/styles/bootstrap.css',
-        'app/vendor/bootstrap-table/bootstrap-table.css',
-        'app/vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css',
+        'app/styles/bootstrap-table.css',
+        'app/styles/bootstrap-datetimepicker.css',
         'app/styles/base.css',
         'app/styles/popupwin.css',
         'app/styles/style.css'
@@ -46,8 +46,8 @@ gulp.task('lib', function () {
         'app/vendor/angular-touch/angular-touch.js',
         'app/vendor/angular-translate/angular-translate.min.js',
         'app/vendor/angular-ueditor/angular-ueditor.js',
-        'app/vendor/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js',
         'app/vendor/angular-translate-loader-static-files/angular-translate-loader-static-files.js',
+        // 发布国际化版本时需要注意此处
         'app/vendor/bootstrap-table/bootstrap-table-locale-all.js'
     ])
         .pipe($.concat('lib.js', {newLine: ';'})) // 合并所有列举的js，以分号分割

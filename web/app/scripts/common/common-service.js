@@ -360,6 +360,12 @@ angular.module('app').factory('commonService', function ($timeout, $compile, $tr
     };
     /**
      * 格式化时间
+     * 1.不传参数，则以yyyy-MM-dd的形式格式化当前日期
+     * 2.传一个参数
+     *      1.如果参数为日期，则以yyyy-MM-dd的形式格式化之
+     *      2.如果参数为字符串，则以该参数的形式格式化当前日期
+     * 3.传两个参数，不论参数的次序
+     *      将传进来的日期以传进来的格式格式化
      */
     service.dateTimeFormatter = function () {
         var date = new Date(), formatter = 'yyyy-MM-dd';

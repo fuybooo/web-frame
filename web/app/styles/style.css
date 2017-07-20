@@ -568,6 +568,7 @@ fieldset[disabled] .btn-major.focus {
     display: none;
     padding-top: 10px;
     padding-bottom: 15px;
+    z-index: 10;
 }
 
 .hover .app-nav-child-list {
@@ -624,5 +625,68 @@ fieldset[disabled] .btn-major.focus {
 
 /* app-content end */
 
-
+/* dashboard start */
+.dash-box{
+    height: 200px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.dash-box-content{
+    height: 140px;
+    line-height: 140px;
+    font-size: 72px;
+    font-weight: bold;
+}
+.dash-box-img{
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    border-radius: 5px;
+    float: right;
+    margin-top: 46px;
+    margin-right: 30px;
+}
+.dash-box-img-device{
+    background: url("../images/dashboard_phone.png") no-repeat #57b2e1 center;
+}
+.dash-box-img-user{
+    background: url("../images/dashboard_users.png") no-repeat #02B095 center;
+}
+.little-strip {
+    display: inline-block;
+    height: 20px;
+    width: 5px;
+    margin-right: 7px;
+    margin-top: 7px;
+    float: left;
+    background-color: #02B095;
+}
+.dash-config{
+    position: absolute;
+    right: 10px;
+    top: 100px;
+}
+.dash-config-img{
+    display: block;
+    background: url("../images/dashboard_config.png") no-repeat center #fff;
+    width: 48px;
+    height: 48px;
+    border: 1px solid rgba(0,0,0,.15);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    border-radius: 100%;
+    cursor: pointer;
+    transition: color .15s linear;
+}
+.dash-config-img:hover{
+    background-color: #EEF0E9;
+}
+.dash-config-list{
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 5px;
+    padding-left: 30px;
+    margin-top: 10px;
+}
+/* dashboard end */
 
