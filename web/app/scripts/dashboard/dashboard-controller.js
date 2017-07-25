@@ -97,7 +97,7 @@ angular.module('app').controller('DashboardController', function ($scope, common
         normal: {
             label: {
                 formatter: function (params) {
-                    return (100 - params.value).toFixed(2) + '%'
+                    return (100 - params.value).toFixed(2) + '%';
                 },
                 textStyle: {
                     baseline: 'top',
@@ -253,7 +253,7 @@ angular.module('app').controller('DashboardController', function ($scope, common
                             show: false
                         },
                         color: function (params) {
-                            return ['#32897d', '#1bb7a0', '#39b5b9', '#52a3bb', '#619cc4','#6d90c5', '#e7dddb'][params.dataIndex]
+                            return ['#32897d', '#1bb7a0', '#39b5b9', '#52a3bb', '#619cc4','#6d90c5', '#e7dddb'][params.dataIndex];
                         }
                     }
                 },

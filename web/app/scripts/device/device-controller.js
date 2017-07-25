@@ -2,4 +2,6 @@ angular.module('app').controller('DeviceController', function($scope, commonServ
     "use strict";
     console.log('测试controller：DeviceController');
 
+
+
 });

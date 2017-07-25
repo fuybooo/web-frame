@@ -203,7 +203,9 @@ td.show .bt-col-editable .glyphicon {
 
 /* 主要的按钮 */
 /* 页面上带有主题色的按钮 02B095 */
-
+.btn{
+    padding: 4px 12px;
+}
 .btn-main {
     color: #fff;
     background-color: #02B095;
@@ -364,6 +366,45 @@ fieldset[disabled] .btn-major.focus {
 .theme-link:active {
     color: #02B095;
     text-decoration: none;
+}
+
+.app-toolbar .btn-normal + .btn-normal{
+    margin-left: 10px;
+}
+
+.btn-img{
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 3px;
+    background: center no-repeat;
+}
+.btn-img-add-device{
+    background-image: url("../images/btn-add-device.png");
+    width: 16px;
+    height: 13px;
+}
+.btn-img-import{
+    background-image: url("../images/btn-import.png");
+    width: 17px;
+    height: 11px;
+}
+.btn-img-export{
+    background-image: url("../images/btn-export.png");
+    width: 17px;
+    height: 11px;
+}
+.btn-img-delete{
+    background-image: url("../images/btn-delete.png");
+    width: 15px;
+    height: 16px;
+}
+.btn-img-device-group{
+    background-image: url("../images/btn-device-group.png");
+    width: 16px;
+    height: 16px;
+}
+.dropdown-menu{
+    top: auto;
 }
 
 /* 根据项目需求新增的统一样式 end */
@@ -689,4 +730,18 @@ fieldset[disabled] .btn-major.focus {
     margin-top: 10px;
 }
 /* dashboard end */
+
+/*device start*/
+.dropdown-menu > li.device-more-li > a{
+    padding: 5px 20px;
+}
+.dropdown-menu > li.device-more-li > a:hover, .dropdown-menu > li.device-more-li > a:focus{
+    background-color: #0ac4b9;
+    color: #fff;
+}
+.device-more-li-division{
+    border-bottom: 1px solid #ddd;
+}
+
+/*device end*/
 

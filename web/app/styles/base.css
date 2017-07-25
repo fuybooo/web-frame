@@ -604,6 +604,10 @@ ul[class^="cr"] li h6 {
     margin-right: 2px;
 }
 
+.mr10 {
+    margin-right: 10px;
+}
+
 .mr15 {
     margin-right: 15px;
 }
@@ -628,6 +632,9 @@ ul[class^="cr"] li h6 {
 /* margin-left */
 .ml3 {
     margin-left: 3px;
+}
+.ml3i {
+    margin-left: 3px!important;
 }
 .ml10{
     margin-left: 10px;
