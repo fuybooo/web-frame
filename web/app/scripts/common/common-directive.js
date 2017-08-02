@@ -498,7 +498,7 @@ angular.module('app')
         return {
             restrict: 'AE',
             replace: true,
-            templateUrl: 'app/views/common/custom-select.html',
+            templateUrl: 'app/views/custom-select.html',
             link: function (scope, ele, attrs) {
                 var $main = $(ele).find('input.custom-select-main');
                 var $list = $(ele).find('.custom-select-list');
@@ -506,6 +506,7 @@ angular.module('app')
                 if (isSearch) {
                     $main = $main.prop('readonly', false);
                 }
+                var isDefault = 'default' in attrs;// 是否有默认值（默认为default的值，如果没有值，则为下拉框的第一项）
                 var model = attrs.model;
                 var ngModel = attrs.csNgModel;
                 var placeholder = attrs.placeholder;
@@ -556,6 +557,18 @@ angular.module('app')
 
                 // 初始化数据，根据指令中的data-model属性取得值
                 var data = scope[model];
+
+                // 设置默认值
+                if(isDefault){
+                    if(attrs.default === ''){
+                        $main.attr('data-key', data[0].key).attr('data-value', data[0].value).val(data[0].value);
+                    }else{
+                        var _default = attrs.default.split(':');
+                        var _key = _default[0];
+                        var _value = _default[1];
+                        $main.attr('data-key', _key).attr('data-value', _value).val(_value);
+                    }
+                }
 
                 if (data && data.length > 0 && data[0].key !== undefined && data[0].value !== undefined) {
                     generatorList(data);

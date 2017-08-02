@@ -187,8 +187,8 @@ td.show .bt-col-editable .glyphicon {
 }
 
 .custom-select-main {
-    background: url("../images/down.png") no-repeat 96%;
-    background-size: 16px 16px;
+    background: url("../images/down.png") no-repeat 94%;
+    background-size: 12px 12px;
     padding-right: 30px;
 }
 
@@ -403,8 +403,56 @@ fieldset[disabled] .btn-major.focus {
     width: 16px;
     height: 16px;
 }
+.btn-img-add-folder{
+    background-image: url("../images/btn-add-folder.png");
+    width: 17px;
+    height: 14px;
+}
+.btn-img-add-document{
+    background-image: url("../images/btn-add-document.png");
+    width: 16px;
+    height: 15px;
+}
+.btn-img-move-document{
+    background-image: url("../images/btn-move-document.png");
+    width: 16px;
+    height: 15px;
+}
+.btn-img-distribute-document{
+    background-image: url("../images/btn-distribute-document.png");
+    width: 16px;
+    height: 15px;
+}
+.btn-img-remote{
+    background-image: url("../images/btn-remote.png");
+    width: 17px;
+    height: 17px;
+}
 .dropdown-menu{
     top: auto;
+}
+.form-control{
+    height: auto;
+    padding: 4px 12px;
+}
+
+/* 查询组件的样式 */
+.app-query-select.custom-select-wrap{
+    width: 100px;
+}
+.app-query-select.custom-select-wrap input{
+    padding: 4px 12px;
+    height: auto;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: 0;
+}
+.app-query-box .app-query-search{
+    display: inline-block;
+    width: 150px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: 0;
 }
 
 /* 根据项目需求新增的统一样式 end */

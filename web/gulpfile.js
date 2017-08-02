@@ -147,7 +147,7 @@ gulp.task('serve', function () {
             baseDir: './'
         }
     });
-    gulp.watch(['app/**/*.*', './index.html']).on('change', browserSync.reload);
+    gulp.watch(['./app/**/*.*', './index.html']).on('change', browserSync.reload);
 });
 /**
  * 执行默认任务（开发）

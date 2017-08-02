@@ -369,6 +369,10 @@ ul[class^="cr"] li h6 {
     width: 120px;
 }
 
+.w150 {
+    width: 150px;
+}
+
 .w195 {
     width: 195px;
 }
@@ -681,6 +685,9 @@ ul[class^="cr"] li h6 {
 }
 .p5_10{
     padding: 5px 10px;
+}
+.p4_12{
+    padding: 4px 12px;
 }
 
 /* padding-top */
