@@ -7,12 +7,9 @@ angular.module('app').controller('ContentController', function($scope, commonSer
             value: '文件名称'
         },
         {
-            key: 'fileType',
-            value: '文件类型'
-        },
-        {
-            key: 'fileFamily',
-            value: '文件分类'
+            key: 'category',
+            value: '分类'
         }
     ];
+    $scope.filePath = '全部文件';
 });

@@ -78,5 +78,94 @@ angular.module('app')
             }
         };
     })
+    .directive('btAppContent', function(dataService){
+        "use strict";
+        return {
+            link: function(scope, ele, attrs){
+                // 查询参数
+                var queryObj = {
+                    queryField: '',
+                    queryValue: ''
+                };
+                // 分页排序参数
+                var tableParams = {
+                    sortName: 'updateTime',
+                    sortOrder: 'desc',
+                    pageSize: 10,
+                    pageNumber: 1
+                };
+                // 加载表格数据
+                var loadData = function(){
+                    dataService.get(dataService.URL.content, $.extend(true, queryObj, tableParams), function(data){
+                        /* 模拟后台处理数据 start */
+                        var result = {
+                            total: data.total,
+                            rows: data.rows.slice((tableParams.pageNumber - 1) * tableParams.pageSize, tableParams.pageNumber * tableParams.pageSize)
+                        };
+                        /* 模拟后台处理数据 end */
+                        console.log('结果', result);
+                        $table.bootstrapTable('load', result);
+                    });
+                };
+                // 初始化表格
+                var $table = $(ele);
+                $table.bootstrapTable({
+                    striped: true,
+                    pagination: true,
+                    pageNumber: tableParams.pageNumber,
+                    pageSize: tableParams.pageSize,
+                    pageList: [10, 20, 50, 100],
+                    sidePagination: "server",
+                    columns: [
+                        {
+                            checkbox: true
+                        },
+                        {
+                            field: 'fileName',
+                            title: '文件名'
+                        },
+                        {
+                            field: 'category',
+                            title: '分类'
+                        },
+                        {
+                            field: 'size',
+                            title: '大小'
+                        },
+                        {
+                            field: 'updateTime',
+                            title: '上传时间'
+                        },
+                        {
+                            field: 'uploader',
+                            title: '上传者'
+                        },
+                        {
+                            field: 'download',
+                            title: '下载次数'
+                        },
+                        {
+                            field: 'browser',
+                            title: '浏览次数'
+                        },
+                        {
+                            title: '操作'
+                        }
+                    ],
+                    onPageChange: function (number, size) {
+                        tableParams.pageNumber = number;
+                        tableParams.pageSize = size;
+                        loadData();
+                    },
+                    onSort: function (name, order) {
+                        tableParams.sortName = name;
+                        tableParams.sortOrder = order;
+                        loadData();
+                    }
+                });
 
+                loadData();
+            }
+        }
+    })
 ;

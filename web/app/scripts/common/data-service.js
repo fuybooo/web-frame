@@ -10,7 +10,8 @@ angular.module('app').factory('dataService', function ($http, $injector, baseReq
 
         user: 'success.json',
         hasSession: 'fail.json',
-        nav: 'nav.json'
+        nav: 'nav.json',
+        content: 'content.json'
         // user: 'user'
     };
     /**

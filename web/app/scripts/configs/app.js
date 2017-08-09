@@ -102,6 +102,9 @@ angular.module('app', ['ui.router', 'ui.load', 'ngSanitize', 'ngAnimate', 'ngTou
     //配置APP
     .config(function ($httpProvider, $translateProvider) {
 
+        // 配置插件语言
+        $.extend($.fn.bootstrapTable.defaults, $.fn.bootstrapTable.locales['zh-CN']);
+
         // Use x-www-form-urlencoded Content-Type
         $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
         /**
