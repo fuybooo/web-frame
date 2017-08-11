@@ -14,6 +14,7 @@ gulp.task('style', function () {
         'app/styles/bootstrap.css',
         'app/styles/bootstrap-table.css',
         'app/styles/bootstrap-datetimepicker.css',
+        'app/styles/kalendae.css',
         'app/styles/base.css',
         'app/styles/popupwin.css',
         'app/styles/style.css'
@@ -34,6 +35,7 @@ gulp.task('lib', function () {
         'app/vendor/jquery/jquery.js',
         'app/vendor/underscore/underscore.js',
         'app/vendor/moment/moment.js',
+        'app/vendor/kalendae/kalendae.js',
         'app/vendor/angular/angular.js',
         'app/vendor/bootstrap/js/bootstrap.js',
         'app/vendor/echarts/echarts.js',
@@ -147,7 +149,7 @@ gulp.task('serve', function () {
             baseDir: './'
         }
     });
-    gulp.watch(['./app/**/*.*', './index.html']).on('change', browserSync.reload);
+    gulp.watch(['app/**/*.*', './index.html']).on('change', browserSync.reload);
 });
 /**
  * 执行默认任务（开发）

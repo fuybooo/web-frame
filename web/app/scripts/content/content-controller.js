@@ -12,4 +12,7 @@ angular.module('app').controller('ContentController', function($scope, commonSer
         }
     ];
     $scope.filePath = '全部文件';
+    $scope.editFileName = function(){
+        console.log('运行快速编辑方法：', arguments)
+    };
 });

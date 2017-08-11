@@ -40,7 +40,9 @@ angular.module('app')
         'app.settingData': 'app.settingData',
         'app.settingSerial': 'app.settingSerial',
         'app.settingLog': 'app.settingLog',
-        'app.settingLogo': 'app.settingLogo'
+        'app.settingLogo': 'app.settingLogo',
+
+        'test': 'test' // 测试页面
     })
     .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $logProvider, $translateProvider, lang, routers) {
         // 配置国际化
@@ -181,6 +183,12 @@ angular.module('app')
                 url: '/settingLogo',
                 templateUrl: 'app/views/setting-logo.html',
                 controller: 'SettingLogoController'
+            })
+            // 测试
+            .state(routers['test'], {
+                url: '/test',
+                templateUrl: 'app/views/test.html',
+                controller: 'TestController'
             })
         ;
         $urlRouterProvider.otherwise('');

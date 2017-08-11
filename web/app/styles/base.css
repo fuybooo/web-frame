@@ -385,6 +385,10 @@ ul[class^="cr"] li h6 {
     width: 260px!important;
 }
 
+.w320 {
+    width: 320px;
+}
+
 .w320i {
     width: 320px!important;
 }
@@ -507,6 +511,10 @@ ul[class^="cr"] li h6 {
     height: 300px;
 }
 
+.h320 {
+    height: 320px;
+}
+
 .h300i {
     height: 300px!important;
 }
@@ -585,6 +593,10 @@ ul[class^="cr"] li h6 {
 
 .mt0i {
     margin-top: 0 !important;
+}
+
+.mt7 {
+    margin-top: 7px;
 }
 
 .mt10 {

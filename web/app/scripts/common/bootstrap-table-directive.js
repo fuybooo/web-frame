@@ -1,6 +1,10 @@
 angular.module('app')
 /**
- * 显示user信息的bootstrap-table
+ * 生成bootstraptable的指令
+ *
+ * 将该指令放在table的外层使用
+ * @example
+ *      <div bt-app-content></div>
  */
     .directive('btUser', function (commonService, dataService) {
         return {
@@ -78,10 +82,12 @@ angular.module('app')
             }
         };
     })
-    .directive('btAppContent', function(dataService){
+    .directive('btAppContent', function ($compile, dataService) {
         "use strict";
         return {
-            link: function(scope, ele, attrs){
+            template: '<table class="main-table"></table>',
+            link: function (scope, ele, attrs) {
+                var $table = $(ele).find('.main-table');
                 // 查询参数
                 var queryObj = {
                     queryField: '',
@@ -95,8 +101,8 @@ angular.module('app')
                     pageNumber: 1
                 };
                 // 加载表格数据
-                var loadData = function(){
-                    dataService.get(dataService.URL.content, $.extend(true, queryObj, tableParams), function(data){
+                var loadData = function () {
+                    dataService.get(dataService.URL.content, $.extend(true, queryObj, tableParams), function (data) {
                         /* 模拟后台处理数据 start */
                         var result = {
                             total: data.total,
@@ -105,10 +111,10 @@ angular.module('app')
                         /* 模拟后台处理数据 end */
                         console.log('结果', result);
                         $table.bootstrapTable('load', result);
+                        $compile($table)(scope);
                     });
                 };
                 // 初始化表格
-                var $table = $(ele);
                 $table.bootstrapTable({
                     striped: true,
                     pagination: true,
@@ -122,7 +128,64 @@ angular.module('app')
                         },
                         {
                             field: 'fileName',
-                            title: '文件名'
+                            title: '文件名',
+                            formatter: function (value, row, index) {
+                                var icon_cls = '';
+                                // 判断是否是文件夹
+                                if (row.isFolder) {
+                                    icon_cls = 'pic_folder';
+                                } else {
+                                    // 根据fileName后缀来判断
+                                    var suffix = value.slice(-value.lastIndexOf('.')).toLowerCase();
+                                    switch (suffix) {
+                                        case 'db':
+                                            icon_cls = 'pic_db';
+                                            break;
+                                        case 'xls':
+                                        case 'xlsx':
+                                        case 'xlsm':
+                                        case 'xlt':
+                                        case 'xltx':
+                                        case 'xltm':
+                                            icon_cls = 'pic_excel';
+                                            break;
+                                        case 'pdf':
+                                            icon_cls = 'pic_pdf';
+                                            break;
+                                        case 'bmp':
+                                        case 'gif':
+                                        case 'jpg':
+                                        case 'png':
+                                            icon_cls = 'pic_photo';
+                                            break;
+                                        case 'ppt':
+                                        case 'pptx':
+                                            icon_cls = 'pic_ppt';
+                                            break;
+                                        case 'rar':
+                                        case 'zip':
+                                        case 'war':
+                                            icon_cls = 'pic_rar';
+                                            break;
+                                        case 'txt':
+                                            icon_cls = 'pic_txt';
+                                            break;
+                                        case 'doc':
+                                        case 'docx':
+                                        case 'dot':
+                                        case 'dotx':
+                                        case 'dotm':
+                                        case 'docm':
+                                            icon_cls = 'pic_word';
+                                            break;
+                                        case 'wps':
+                                            icon_cls = 'pic_wps';
+                                            break;
+                                    }
+                                }
+                                return '<span class="common-bg file-pic ' + icon_cls + '"></span>' +
+                                       '<span bt-col-editable class="bt-col-editable" data-quick-edit-ok-fn="editFileName" data-qe-title="重命名" data-index="' + index + '" data-id="' + row.id + '" data-value="' + (value || '') + '"></span>';
+                            }
                         },
                         {
                             field: 'category',
@@ -153,11 +216,13 @@ angular.module('app')
                         }
                     ],
                     onPageChange: function (number, size) {
+                        console.log('onPageChange')
                         tableParams.pageNumber = number;
                         tableParams.pageSize = size;
                         loadData();
                     },
                     onSort: function (name, order) {
+                        console.log('onSort')
                         tableParams.sortName = name;
                         tableParams.sortOrder = order;
                         loadData();
@@ -166,6 +231,6 @@ angular.module('app')
 
                 loadData();
             }
-        }
+        };
     })
 ;

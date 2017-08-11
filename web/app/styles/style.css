@@ -17,7 +17,7 @@
 html, body {
     cursor: default;
     color: #333;
-    font-family: 黑体,"Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 黑体, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
 }
 
@@ -150,6 +150,59 @@ td.show .bt-col-editable .glyphicon {
     content: '\f0d7';
 }
 
+.common-bg {
+    display: inline-block;
+    background: center no-repeat;
+}
+
+.file-pic {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    background-size: 100%;
+    vertical-align: -14%;
+}
+
+.pic_db {
+    background-image: url("../images/pic_db.png");
+}
+
+.pic_excel {
+    background-image: url("../images/pic_excel.png");
+}
+
+.pic_folder {
+    background-image: url("../images/pic_folder.png");
+}
+
+.pic_pdf {
+    background-image: url("../images/pic_pdf.png");
+}
+
+.pic_photo {
+    background-image: url("../images/pic_photo.png");
+}
+
+.pic_ppt {
+    background-image: url("../images/pic_ppt.png");
+}
+
+.pic_rar {
+    background-image: url("../images/pic_rar.png");
+}
+
+.pic_txt {
+    background-image: url("../images/pic_txt.png");
+}
+
+.pic_word {
+    background-image: url("../images/pic_word.png");
+}
+
+.pic_wps {
+    background-image: url("../images/pic_wps.png");
+}
+
 /* custom-select */
 .custom-select-wrap {
     position: relative;
@@ -203,9 +256,10 @@ td.show .bt-col-editable .glyphicon {
 
 /* 主要的按钮 */
 /* 页面上带有主题色的按钮 02B095 */
-.btn{
+.btn {
     padding: 4px 12px;
 }
+
 .btn-main {
     color: #fff;
     background-color: #02B095;
@@ -368,86 +422,100 @@ fieldset[disabled] .btn-major.focus {
     text-decoration: none;
 }
 
-.app-toolbar .btn-normal + .btn-normal{
+.app-toolbar .btn-normal + .btn-normal {
     margin-left: 10px;
 }
 
-.btn-img{
+.btn-img {
     display: inline-block;
     vertical-align: middle;
     margin-right: 3px;
     background: center no-repeat;
 }
-.btn-img-add-device{
+
+.btn-img-add-device {
     background-image: url("../images/btn-add-device.png");
     width: 16px;
     height: 13px;
 }
-.btn-img-import{
+
+.btn-img-import {
     background-image: url("../images/btn-import.png");
     width: 17px;
     height: 11px;
 }
-.btn-img-export{
+
+.btn-img-export {
     background-image: url("../images/btn-export.png");
     width: 17px;
     height: 11px;
 }
-.btn-img-delete{
+
+.btn-img-delete {
     background-image: url("../images/btn-delete.png");
     width: 15px;
     height: 16px;
 }
-.btn-img-device-group{
+
+.btn-img-device-group {
     background-image: url("../images/btn-device-group.png");
     width: 16px;
     height: 16px;
 }
-.btn-img-add-folder{
+
+.btn-img-add-folder {
     background-image: url("../images/btn-add-folder.png");
     width: 17px;
     height: 14px;
 }
-.btn-img-add-document{
+
+.btn-img-add-document {
     background-image: url("../images/btn-add-document.png");
     width: 16px;
     height: 15px;
 }
-.btn-img-move-document{
+
+.btn-img-move-document {
     background-image: url("../images/btn-move-document.png");
     width: 16px;
     height: 15px;
 }
-.btn-img-distribute-document{
+
+.btn-img-distribute-document {
     background-image: url("../images/btn-distribute-document.png");
     width: 16px;
     height: 15px;
 }
-.btn-img-remote{
+
+.btn-img-remote {
     background-image: url("../images/btn-remote.png");
     width: 17px;
     height: 17px;
 }
-.dropdown-menu{
+
+.dropdown-menu {
     top: auto;
 }
-.form-control{
+
+.form-control {
     height: auto;
     padding: 4px 12px;
 }
 
 /* 查询组件的样式 */
-.app-query-select.custom-select-wrap{
+.app-query-select.custom-select-wrap {
     width: 100px;
 }
-.app-query-select.custom-select-wrap input{
+
+.app-query-select.custom-select-wrap input {
     padding: 4px 12px;
     height: auto;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     border-right: 0;
 }
-.app-query-box .app-query-search{
+
+.app-query-box .app-query-search {
     display: inline-block;
     width: 150px;
     border-top-left-radius: 0;
@@ -676,7 +744,7 @@ fieldset[disabled] .btn-major.focus {
 }
 
 .app-nav-item .app-nav-child-item:hover,
-.app-nav-item .app-nav-child-item.active{
+.app-nav-item .app-nav-child-item.active {
     color: #02B095;
     background-color: #eee;
 }
@@ -715,19 +783,21 @@ fieldset[disabled] .btn-major.focus {
 /* app-content end */
 
 /* dashboard start */
-.dash-box{
+.dash-box {
     height: 200px;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
 }
-.dash-box-content{
+
+.dash-box-content {
     height: 140px;
     line-height: 140px;
     font-size: 72px;
     font-weight: bold;
 }
-.dash-box-img{
+
+.dash-box-img {
     display: inline-block;
     width: 48px;
     height: 48px;
@@ -736,12 +806,15 @@ fieldset[disabled] .btn-major.focus {
     margin-top: 46px;
     margin-right: 30px;
 }
-.dash-box-img-device{
+
+.dash-box-img-device {
     background: url("../images/dashboard_phone.png") no-repeat #57b2e1 center;
 }
-.dash-box-img-user{
+
+.dash-box-img-user {
     background: url("../images/dashboard_users.png") no-repeat #02B095 center;
 }
+
 .little-strip {
     display: inline-block;
     height: 20px;
@@ -751,45 +824,80 @@ fieldset[disabled] .btn-major.focus {
     float: left;
     background-color: #02B095;
 }
-.dash-config{
+
+.dash-config {
     position: absolute;
     right: 10px;
     top: 100px;
 }
-.dash-config-img{
+
+.dash-config-img {
     display: block;
     background: url("../images/dashboard_config.png") no-repeat center #fff;
     width: 48px;
     height: 48px;
-    border: 1px solid rgba(0,0,0,.15);
-    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    border: 1px solid rgba(0, 0, 0, .15);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
     border-radius: 100%;
     cursor: pointer;
     transition: color .15s linear;
 }
-.dash-config-img:hover{
+
+.dash-config-img:hover {
     background-color: #EEF0E9;
 }
-.dash-config-list{
+
+.dash-config-list {
     border: 1px solid #ccc;
     border-radius: 3px;
     padding: 5px;
     padding-left: 30px;
     margin-top: 10px;
 }
+
 /* dashboard end */
 
 /*device start*/
-.dropdown-menu > li.device-more-li > a{
+.dropdown-menu > li.device-more-li > a {
     padding: 5px 20px;
 }
-.dropdown-menu > li.device-more-li > a:hover, .dropdown-menu > li.device-more-li > a:focus{
+
+.dropdown-menu > li.device-more-li > a:hover, .dropdown-menu > li.device-more-li > a:focus {
     background-color: #0ac4b9;
     color: #fff;
 }
-.device-more-li-division{
+
+.device-more-li-division {
     border-bottom: 1px solid #ddd;
 }
 
 /*device end*/
+
+/* test start */
+/* 时间多选控件 */
+.sdc-ul {
+    width: 180px;
+    user-select: none;
+}
+.sdc-li {
+    float: left;
+    padding: 3px;
+    margin: 1px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background-color: #f9f9f9;
+    transition: background-color .15s linear;
+    cursor: pointer;
+}
+
+.sdc-li:hover{
+    border-color: #777;
+}
+.sdc-li.active{
+    background-color: #7EA0E2;
+    color: #fff;
+}
+
+/* test end */
 

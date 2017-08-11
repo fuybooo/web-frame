@@ -7,8 +7,8 @@
     <button class="btn btn-normal"><span class="btn-img btn-img-remote"></span>远程删除</button>
     <button class="btn btn-normal"><span class="btn-img btn-img-delete"></span>批量删除</button>
     <div class="app-query-box di fr">
-        <custom-select class="app-query-select" data-model="queryCondition" default></custom-select><input type="text" class="form-control app-query-search" placeholder="请输入搜索内容...">
+        <custom-select class="app-query-select" data-model="queryCondition" default cs-ng-model="contentQuery"></custom-select><input type="text" class="form-control app-query-search" placeholder="请输入搜索内容...">
     </div>
 </div>
 <div class="mt20 mb20">当前位置：<span ng-bind-html="filePath"></span></div>
-<table class="app-content-table" bt-app-content></table>
+<div class="app-content-table" bt-app-content></div>
