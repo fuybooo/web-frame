@@ -1,6 +1,5 @@
 angular.module('app').controller('ContentController', function($scope, commonService, dataService){
     "use strict";
-    console.log('测试controller：ContentController');
     $scope.queryCondition = [
         {
             key: 'fileName',
@@ -12,7 +11,5 @@ angular.module('app').controller('ContentController', function($scope, commonSer
         }
     ];
     $scope.filePath = '全部文件';
-    $scope.editFileName = function(){
-        console.log('运行快速编辑方法：', arguments)
-    };
+
 });

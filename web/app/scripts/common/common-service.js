@@ -207,11 +207,18 @@ angular.module('app').factory('commonService', function ($timeout, $compile, $tr
             '</div>');
         var target = options.target;
         target.append($compile($editPanel)(options.scope));
+
+        // 计算弹出框应该显示的位置
+        // 计算父元素距离顶部和底部的位置
+
+        // 事件绑定
+        // 点击关闭按钮关闭编辑框
         $('.js-edit-panel-close').off('click.close').on('click.close', function (e) {
             e.stopPropagation();
             removeEditPanel();
             target.parent().removeClass('show');
         });
+        // 点击其他地方关闭编辑框
         $(document).off('click.close.editPanel').on('click.close.editPanel', function (e) {
             if ($('.js-edit-panel').length > 0 && !$.contains($('.js-edit-panel')[0], e.target)) {
                 removeEditPanel();
@@ -221,6 +228,7 @@ angular.module('app').factory('commonService', function ($timeout, $compile, $tr
                 }
             }
         });
+        // 点击确定执行事件
         $('.js-sure-edit').off('click.sure.edit').on('click.sure.edit', options.ok);
     };
     /**

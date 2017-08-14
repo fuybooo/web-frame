@@ -216,13 +216,11 @@ angular.module('app')
                         }
                     ],
                     onPageChange: function (number, size) {
-                        console.log('onPageChange')
                         tableParams.pageNumber = number;
                         tableParams.pageSize = size;
                         loadData();
                     },
                     onSort: function (name, order) {
-                        console.log('onSort')
                         tableParams.sortName = name;
                         tableParams.sortOrder = order;
                         loadData();
@@ -230,6 +228,9 @@ angular.module('app')
                 });
 
                 loadData();
+                scope.editFileName = function(newValue, id, index){
+                    // 维护一份最新的数据
+                };
             }
         };
     })

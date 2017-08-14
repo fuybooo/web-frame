@@ -185,7 +185,7 @@ angular.module('app')
                 controller: 'SettingLogoController'
             })
             // 测试
-            .state(routers['test'], {
+            .state(routers.test, {
                 url: '/test',
                 templateUrl: 'app/views/test.html',
                 controller: 'TestController'

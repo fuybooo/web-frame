@@ -1,4 +1,4 @@
-angular.module('app').controller('TestController', function($scope, commonService, dataService){
+angular.module('app').controller('TestController', function($scope, commonService, dataService, $timeout){
     "use strict";
     console.log('测试controller：TestController');
     new Kalendae(document.getElementById("test-kalendae-multi-1"), {
@@ -25,30 +25,13 @@ angular.module('app').controller('TestController', function($scope, commonServic
         console.log($scope.sdcValue);
     };
 
-    // $scope.days = ['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'];
-    //
-    // var selectedArr = [];
-    // $('.sdc-wrap').find('.sdc-ul').off('click').on('click','.sdc-li', function(){
-    //     var text = $(this).text();
-    //     var index = selectedArr.indexOf(text);
-    //     if($(this).hasClass('active')){
-    //         $(this).removeClass('active');
-    //         if(index !== -1){
-    //             selectedArr.splice(index, 1);
-    //         }
-    //     }else{
-    //         $(this).addClass('active');
-    //         if(index === -1){
-    //             selectedArr.push(text);
-    //         }
-    //     }
-    //     $scope.$apply(function(){
-    //         $scope.sdcValue = selectedArr.sort().join(',');
-    //     });
-    //
-    // });
-    // $('.sdc-wrap').find('.sdc-input').on('focus', function(){
-    //     $('.sdc-wrap').find('.sdc-ul').removeClass('dn');
-    // });
 
+    // 多选框赋值测试
+    // $scope.checkbox1 = true;
+    // $scope.checkbox1 = false;
+
+
+    $timeout(function(){
+        $scope.checkbox1 = true;
+    }, 1000);
 });
