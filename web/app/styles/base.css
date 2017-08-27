@@ -107,6 +107,10 @@ textarea.ng-dirty.ng-invalid:focus {
     display: inline-flex;
 }
 
+.df {
+    display: flex;
+}
+
 .dib {
     display: inline-block;
 }
@@ -351,6 +355,10 @@ ul[class^="cr"] li h6 {
 
 .w60 {
     width: 60px;
+}
+
+.w66 {
+    width: 66px;
 }
 
 .w70 {
@@ -615,9 +623,16 @@ ul[class^="cr"] li h6 {
     margin-top: -35px;
 }
 
+.mt100 {
+    margin-top: 100px;
+}
+
 /* margin-right */
 .mr2 {
     margin-right: 2px;
+}
+.mr5 {
+    margin-right: 5px;
 }
 
 .mr10 {
@@ -645,9 +660,16 @@ ul[class^="cr"] li h6 {
     margin-bottom: 20px;
 }
 
+.mb30 {
+    margin-bottom: 30px;
+}
+
 /* margin-left */
 .ml3 {
     margin-left: 3px;
+}
+.ml5 {
+    margin-left: 5px;
 }
 .ml3i {
     margin-left: 3px!important;
@@ -694,6 +716,9 @@ ul[class^="cr"] li h6 {
 /* 简写两个值的情况 0为特殊情况，可以不用加下划线*/
 .p05 {
     padding: 0 5px;
+}
+.p010 {
+    padding: 0 10px;
 }
 .p5_10{
     padding: 5px 10px;

@@ -872,5 +872,158 @@ angular.module('app')
             }
         };
     })
+    .directive('sliderSelect', function () {
+        return {
+            restrict: 'E',
+            template: '<div class="df pr">' +
+            '<span class="glyphicon glyphicon-minus slider-select-change slider-select-mimus"></span>' +
+            '<span class="slider-select-value slider-select-value-min"></span>' +
+            '<span class="slider-select-value slider-select-value-max"></span>' +
+            '<span class="slider-select-value slider-select-value-current"></span>' +
+            '<div class="slider-select">' +
+            '<span class="slider-select-subject"></span>' +
+            '</div>' +
+            '<div class="slider-select-mask dn"></div>' +
+            '<span class="glyphicon glyphicon-plus slider-select-change slider-select-plus"></span>' +
+            '</div>',
+            link: function (scope, ele, attrs) {
+
+                var sliderBedWidth = attrs.width - 0 || 280;
+                var max = sliderBedWidth - 10; // 减去滑块的宽度
+
+                var maxValue = attrs.max - 0 || max;
+                var minValue = attrs.min - 0 || 0;
+                var currentValue = attrs.current - 0 || minValue;
+                // 特殊类型：24小时制，且进行时间转化
+                if(attrs.type === 'H'){
+                    maxValue = 1440; // 一天1440分钟 24*60
+                }
+                var per = max / (maxValue - minValue);
+
+                $(ele).find('.slider-select-value-min').text(minValue);
+                $(ele).find('.slider-select-value-max').text(attrs.type === 'H' ? '24' : maxValue).css('left', sliderBedWidth + 20);
+                var current = $(ele).find('.slider-select-value-current');
+                var getCurrentValue = function(left){
+                    if(attrs.type === 'H'){
+                        return ('0' + Math.floor(Math.ceil(left / per) / 60)).slice(-2) + ':' + ('0' + (Math.ceil(left / per) % 60)).slice(-2);
+                    }else{
+                        return Math.ceil(left / per);
+                    }
+                }
+                var calcCurrent = function (left) {
+                    // 初始化
+                    if (left === undefined) {
+                        current.text(currentValue).css('left', currentValue * per + 20);
+                    } else {
+                        // 根据left计算
+                        current.text(getCurrentValue(left)).css('left', left + 20);
+                    }
+                }
+                calcCurrent();
+                var slider = $(ele).find('.slider-select-subject');
+                var mask = $(ele).find('.slider-select-mask');
+                var bed = $(ele).find('.slider-select').css('width', sliderBedWidth);
+                $(ele).find('.slider-select-mask').css('width', sliderBedWidth);
+
+                var getViewLeft = function (left) {
+                    return Math.round(left / per) * per;
+                };
+
+                var oldX, oldY, left, top;
+                slider.on('mousedown', function (e) {
+                    mask.removeClass('dn');
+                    // 获取当前鼠标的位置，判断是否在有效范围内
+                    oldX = e.pageX;
+                    left = slider.css('left');
+                });
+                mask.on('mousemove', function (e) {
+                    var newLeft = e.pageX - oldX + (left.replace('px', '') - 0);
+                    if (newLeft < 0) {
+                        newLeft = 0;
+                        mask.addClass('dn');
+                    } else if (newLeft > max) {
+                        newLeft = max;
+                        mask.addClass('dn');
+                    }
+                    calcCurrent(getViewLeft(newLeft));
+                    // slider.css('left', newLeft);
+                    slider.css('left', getViewLeft(newLeft));
+                }).on('mouseup', function (e) {
+                    oldX = e.pageX;
+                    left = slider.css('left');
+                    mask.addClass('dn');
+                });
+                bed.on('click', function (e) {
+                    var newLeft = e.offsetX > max ? max : e.offsetX;
+                    calcCurrent(getViewLeft(newLeft));
+                    // slider.css('left', newLeft);
+                    slider.css('left', getViewLeft(newLeft));
+                });
+                $(ele).find('.slider-select-change').on('click', function () {
+                    var newLeft = slider.css('left').replace('px', '') - 0;
+                    if ($(this).hasClass('slider-select-mimus')) {
+                        newLeft -= per;
+                    } else {
+                        newLeft += per;
+                    }
+                    if (newLeft > max) {
+                        newLeft = max;
+                    } else if (newLeft < 0) {
+                        newLeft = 0;
+                    }
+                    calcCurrent(getViewLeft(newLeft));
+                    // slider.css('left', newLeft);
+                    slider.css('left', getViewLeft(newLeft));
+                });
+            }
+        }
+    })
+    .directive('timeRange', function($compile){
+        return {
+            restrict: 'E',
+            replace: true,
+            template: '<div class="time-range-wrap">' +
+            '<div class="time-range-content">' +
+            '<select class="form-control time-range-select time-range-start-hour" ng-change="changeTime(1)" ng-init="startHour = hours[0]" ng-model="startHour" ng-options="h for h in hours"></select>' +
+            '<span class="p05">:</span>' +
+            '<select class="form-control time-range-select time-range-start-minute" ng-change="changeTime(2)" ng-init="startMinute = minutes[0]" ng-model="startMinute" ng-options="m for m in minutes"></select>' +
+            '<span class="p010">-</span>' +
+            '<select class="form-control time-range-select time-range-end-hour" ng-change="changeTime(3)" ng-init="endHour = hours[0]" ng-model="endHour" ng-options="h for h in hours"></select>' +
+            '<span class="p05">:</span>' +
+            '<select class="form-control time-range-select time-range-end-minute" ng-change="changeTime(4)" ng-init="endMinute = minutes[0]" ng-model="endMinute" ng-options="m for m in minutes"></select>' +
+            '</div>' +
+            '</div>',
+            controller: function($scope){
+                var hours = [];
+                var minutes = [];
+                for(var i=0;i<24;i++){
+                    hours.push(('0' + i).slice(-2));
+                }
+                for(var i=0;i<60;i++){
+                    minutes.push(('0' + i).slice(-2));
+                }
+                $scope.hours = hours;
+                $scope.minutes = minutes;
+
+            },
+            link: function(scope, ele, attrs){
+                var startHour = attrs.startHourModel;
+                var startMinute = attrs.startMinuteModel;
+                var endHour = attrs.endHourModel;
+                var endMinute = attrs.endMinuteModel;
+                // 是否使用自定义的model
+                if (startHour) {
+                    var $main = $(ele).find('.time-range-content');
+                    $main.find('.time-range-start-hour').attr({'ng-model': startHour, 'ng-init': startHour + '=hours[0]'});
+                    $main.find('.time-range-start-minute').attr({'ng-model': startMinute, 'ng-init': startMinute + '=hours[0]'});
+                    $main.find('.time-range-end-hour').attr({'ng-model': endHour, 'ng-init': endHour + '=hours[0]'});
+                    $main.find('.time-range-end-minute').attr({'ng-model': endMinute, 'ng-init': endMinute + '=hours[0]'});
+                    var _$main = $main.clone();
+                    $main.remove();
+                    $(ele).append($compile(_$main)(scope));
+                }
+            }
+        }
+    })
 
 ;

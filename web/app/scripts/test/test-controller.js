@@ -69,18 +69,18 @@ angular.module('app').controller('TestController', function($scope, commonServic
 
 
     // // 测试高德地图
-    var script = document.createElement('script');
-    script.src = 'https://webapi.amap.com/maps?v=1.3&amp;key=0d9e58dc8d6846f9b539006dac2c73ee&callback=initMap';
-    document.body.appendChild(script);
-    $window.initMap = function(){
-        var map = new AMap.Map('container', {
-            center: [117.000923, 36.675807],
-            zoom: 6
-        });
-        map.plugin(["AMap.ToolBar"], function() {
-            map.addControl(new AMap.ToolBar());
-        });
-    };
+    // var script = document.createElement('script');
+    // script.src = 'https://webapi.amap.com/maps?v=1.3&amp;key=0d9e58dc8d6846f9b539006dac2c73ee&callback=initMap';
+    // document.body.appendChild(script);
+    // $window.initMap = function(){
+    //     var map = new AMap.Map('container', {
+    //         center: [117.000923, 36.675807],
+    //         zoom: 6
+    //     });
+    //     map.plugin(["AMap.ToolBar"], function() {
+    //         map.addControl(new AMap.ToolBar());
+    //     });
+    // };
 
     // 测试百度地图
     // var script = document.createElement('script');
@@ -134,4 +134,17 @@ angular.module('app').controller('TestController', function($scope, commonServic
     //     getBoundary();
     //
     // };
+
+    $scope.showTimeRange = function(){
+        console.log('使用默认model');
+        console.log($scope.startHour);
+        console.log($scope.startMinute);
+        console.log($scope.endHour);
+        console.log($scope.endMinute);
+        console.log('使用自定义model');
+        console.log($scope.startHour1);
+        console.log($scope.startMinute1);
+        console.log($scope.endHour1);
+        console.log($scope.endMinute1);
+    }
 });

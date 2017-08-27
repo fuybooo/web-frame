@@ -898,6 +898,69 @@ fieldset[disabled] .btn-major.focus {
     background-color: #7EA0E2;
     color: #fff;
 }
+/* 时间多选控件 end*/
 
+/* 滑动选择 */
+.slider-select{
+    position: relative;
+    height: 15px;
+    background-color: #DCDCDC;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.slider-select-subject{
+    position: absolute;
+    top: -5px;
+    left: 0;
+    height: 25px;
+    width: 10px;
+    background-color: #0ac4b9;
+    cursor: pointer;
+}
+.slider-select-change{
+    color: #02a58c;
+}
+.slider-select-change:hover{
+    color: #1597a5;
+}
+.slider-select-mimus{
+    margin-right: 5px;
+    cursor: pointer;
+}
+.slider-select-plus{
+    margin-left: 5px;
+    cursor: pointer;
+}
+.slider-select-mask{
+    position: absolute;
+    top: -8px;
+    left: 20px;
+    height: 31px;
+    z-index: 2;
+    cursor: pointer;
+}
+.slider-select-value{
+    position: absolute;
+    display: inline-block;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    background: #eee;
+}
+.slider-select-value-min{
+    left: 10px;
+}
+.slider-select-value-min, .slider-select-value-max{
+    top: 18px;
+}
+.slider-select-value-current{
+    top: -25px;
+    left: 21px;
+}
+.time-range-select{
+    width: 66px;
+    display: inline-block;
+}
+/* 滑动选择 end */
 /* test end */
 

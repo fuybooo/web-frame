@@ -32,9 +32,46 @@
             <input type="checkbox" ng-model="checkbox1">测试多选框的赋值
         </div>
     </div>
-    <div class="row">
+    <!--<div class="row">-->
+        <!--<div class="col-sm-12">-->
+            <!--<div id="container" style="height:500px"></div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row mt30 mb30">-->
+        <!--<div class="col-sm-12">-->
+            <!--<slider-select></slider-select>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="row mt100 mb30">
         <div class="col-sm-12">
-            <div id="container" style="height:500px"></div>
+            <slider-select data-width="400" data-type="H"></slider-select>
+        </div>
+    </div>
+    <div class="row mt100 mb30">
+        <div class="col-sm-12">
+            事件选择器
+        </div>
+    </div>
+    <div class="row mt100 mb30">
+        <div class="col-sm-12">
+            <time-range data-start-hour-model="startHour"
+                        data-start-minute-model="startMinute"
+                        data-end-hour-model="endHour"
+                        data-end-minute-model="endMinute"></time-range>
+        </div>
+    </div>
+    <div class="row mt100 mb30">
+        <div class="col-sm-12">
+            <time-range data-start-hour-model="startHour1"
+                        data-start-minute-model="startMinute1"
+                        data-end-hour-model="endHour1"
+                        data-end-minute-model="endMinute1"></time-range>
+        </div>
+    </div>
+
+    <div class="row mt100 mb30">
+        <div class="col-sm-12">
+            <button class="btn btn-primary" ng-click="showTimeRange()">显示选择的时间</button>
         </div>
     </div>
 
