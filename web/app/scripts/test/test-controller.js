@@ -135,7 +135,6 @@ angular.module('app').controller('TestController', function($scope, commonServic
     //
     // };
 
-<<<<<<< Updated upstream
     $scope.showTimeRange = function(){
         console.log('使用默认model');
         console.log($scope.startHour);
