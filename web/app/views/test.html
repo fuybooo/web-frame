@@ -75,4 +75,23 @@
         </div>
     </div>
 
+
+    <form name="outerForm" novalidate>
+        <input class="form-control" required name="outer" ng-model="outer" placeholder="外部输入框"><span validate-generator></span>
+        <input class="form-control" type="text" name="inner" ng-model="inner" placeholder="内部输入框"><span validate-generator></span>
+        <button class="btn btn-primary" ng-disabled="inner == '' || outerForm.inner.$invalid || outerForm.inner.$pristine">内部按钮</button>
+        <button class="btn btn-primary" ng-disabled="outerForm.$invalid || outerForm.$pristine">外部按钮</button>
+    </form>
+
+
+    <form name="iosWifiForm00" novalidate="" class="" style="">
+        <div class="col-xs-5">
+            <input type="text"
+                   ng-model="SSID_STR" name="SSID_STR" ng-maxlength="30" required="" style="">
+            <span validate-generator></span>
+        </div>
+    </form>
+
+    <input type="time" pattern="hh:ii:ss">
+    <div ng-bind-html="htmlTest"></div>
 </div>

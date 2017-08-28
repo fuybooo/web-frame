@@ -1,4 +1,4 @@
-angular.module('app').controller('TestController', function($scope, commonService, dataService, $timeout, $window){
+angular.module('app').controller('TestController', function($scope, commonService, dataService, $timeout, $window, $sce){
     "use strict";
     console.log('测试controller：TestController');
     new Kalendae(document.getElementById("test-kalendae-multi-1"), {
@@ -135,6 +135,7 @@ angular.module('app').controller('TestController', function($scope, commonServic
     //
     // };
 
+<<<<<<< Updated upstream
     $scope.showTimeRange = function(){
         console.log('使用默认model');
         console.log($scope.startHour);
@@ -147,4 +148,8 @@ angular.module('app').controller('TestController', function($scope, commonServic
         console.log($scope.endHour1);
         console.log($scope.endMinute1);
     }
+    // $sce
+    $timeout(function(){
+        $scope.htmlTest = 'test<br>';
+    }, 1000);
 });
