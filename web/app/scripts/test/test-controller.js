@@ -151,4 +151,75 @@ angular.module('app').controller('TestController', function($scope, commonServic
     $timeout(function(){
         $scope.htmlTest = 'test<br>';
     }, 1000);
+
+
+    $scope.add = function(){
+        console.log($scope.heroName);
+    }
+    $scope.handleResult = function(res){
+        var realResult = [];
+
+        // var result = res.split('#');
+        // for(var i = 0;i<result.length;i++){
+        //     realResult.push({
+        //         key: result[i],
+        //         value: result[i]
+        //     });
+        // }
+
+        for(var i=0;i<res.length;i++){
+            realResult.push({
+                key: res[i].name,
+                value: res[i].name
+            })
+        }
+
+        return realResult;
+    };
+
+    $scope.mockQueryData = [
+        {
+            key: '1',
+            value: '1'
+        },
+        {
+            key: '2',
+            value: '2'
+        },
+        {
+            key: '3',
+            value: '3'
+        },
+        {
+            key: '4',
+            value: '4'
+        },
+        {
+            key: '5',
+            value: '5'
+        },
+        {
+            key: '6',
+            value: '6'
+        },
+        {
+            key: '7',
+            value: '7'
+        },
+        {
+            key: '8',
+            value: '8'
+        },
+        {
+            key: '9',
+            value: '9'
+        },
+        {
+            key: '10',
+            value: '10'
+        },
+    ];
+    $scope.testQuerySelectMethod = function(){
+        console.log($scope.querySelectTest);
+    }
 });

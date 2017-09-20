@@ -504,247 +504,273 @@ angular.module('app')
             restrict: 'AE',
             replace: true,
             templateUrl: 'app/views/custom-select.html',
-            compile: function (tEle, tAttrs, transcludeFn) {
-                return function (scope, ele, attrs) {
-                    var $main = $(ele).find('input.custom-select-main');
-                    var $list = $(ele).find('.custom-select-list');
-                    var isSearch = 'search' in attrs;// 是否为搜索输入框
-                    if (isSearch) {
-                        $main = $main.prop('readonly', false);
-                    }
-                    var isDefault = 'default' in attrs;// 是否有默认值（默认为default的值，如果没有值，则为下拉框的第一项）
-                    var model = attrs.model;
-                    var ngModel = attrs.csNgModel;
-                    var placeholder = attrs.placeholder;
-                    $main.attr('placeholder', placeholder);
-                    var _$main = $main.clone().attr('ng-model', ngModel);
-                    $main.remove();
-                    $main = _$main;
-                    $(ele).prepend($compile($main)(scope));
-                    var generatorList = function (data) {
-                        var liHtml = '';
-                        if (data.length === 0) {
-                            liHtml = '<li class="custom-select-item custom-select-no-click">没有匹配记录</li>';
-                        } else {
-                            var n = arguments[1]; // 搜索框输入的关键字
-                            for (var i = 0, l = data.length; i < l; i++) {
-                                var item = data[i];
-                                liHtml += '<li class="custom-select-item' + (i === 0 ? ' active' : '') + '" data-key="' + item.key + '" data-value="' + item.value + '">' + commonService.splitString(item.value, n) + '</li>';
-                            }
-                        }
-                        $list.empty().append(liHtml);
-                        return false;
-                    };
-
-                    var filterData = function (n) {
-                        var _data = [];
-                        if (n !== '') {
-                            // 策略1，包含
-                            // 策略2，贪婪匹配
-                            // 仿照webStorm的文件搜索功能
-                            var regStr = '';
-                            for (var j = 0, lj = n.length; j < lj; j++) {
-                                // var j_item = n.charAt(j);
-                                // regStr += '(' + j_item.toUpperCase() + '|' + j_item.toLowerCase() + ').+?';
-                                regStr += n.charAt(j) + '[\\s\\S]*?';
-                            }
-                            var reg = new RegExp(regStr, 'i');
-                            for (var i = 0, l = data.length; i < l; i++) {
-                                var item = data[i];
-                                if (reg.test(item.value)) {
-                                    _data.push(data[i]);
-                                }
-                            }
-                        } else {
-                            _data = data;
-                        }
-                        return _data;
-                    };
-
-                    // 初始化数据，根据指令中的data-model属性取得值
-                    var data = scope[model];
-                    // 设置默认值
-                    if (isDefault) {
-                        if (attrs.default === '') {
-                            $main.attr('data-key', data[0].key).attr('data-value', data[0].value);
-                            scope[ngModel] = data[0].value;
-                        } else {
-                            var _default = attrs.default.split(':');
-                            var _key = _default[0];
-                            var _value = _default[1];
-                            $main.attr('data-key', _key).attr('data-value', _value).val(_value);
-                        }
-                    }
-
-                    if (data && data.length > 0 && data[0].key !== undefined && data[0].value !== undefined) {
-                        generatorList(data);
+            link: function (scope, ele, attrs) {
+                var $main = $(ele).find('input.custom-select-main');
+                var $list = $(ele).find('.custom-select-list');
+                var isSearch = 'search' in attrs; // 是否为搜索输入框
+                if (isSearch) {
+                    $main = $main.prop('readonly', false);
+                }
+                var isDefault = 'default' in attrs;// 是否有默认值（默认为default的值，如果没有值，则为下拉框的第一项）
+                var placeholder = attrs.placeholder;
+                $main.attr('placeholder', placeholder);
+                var ngModel = attrs.csNgModel;
+                // var _$main = $main.clone().attr('ng-model', ngModel);
+                // $main.remove();
+                // $main = _$main;
+                // $(ele).prepend($compile($main)(scope));
+                var generatorList = function (data) {
+                    var liHtml = '';
+                    if (data.length === 0) {
+                        liHtml = '<li class="custom-select-item custom-select-no-click">没有匹配记录</li>';
                     } else {
-                        console.error('请使用data-model绑定下拉框的数据，且数据中必须包含key和value两个属性！');
-                        return;
-                    }
-
-
-                    var count = ++commonService.counts.customSelect;
-                    $(ele)
-                        .on('click.cs', '.custom-select-main', onClickMain)
-                        .on('click.cs', '.custom-select-item:not(.custom-select-no-click)', onClickItem)
-                        .on('mouseenter.cs', '.custom-select-item', onMouseEnterItem)
-                    ;
-                    $main.on('keydown.cs', onKeyDownCustomSelect);
-                    $main.on('keyup.cs', onKeyUpCustomSelect);
-                    // 引入count,使得各个下拉框互不影响
-                    $(document).off('click.customselect' + count).on('click.customselect' + count, onClickDocument);
-
-                    // 点击选择框控件
-                    function onClickMain() {
-                        // 当前下拉框是否为显示的
-                        var isCurrentVisible = $list.is(':visible');
-                        // 隐藏所有的下拉框
-                        $('.custom-select-list').addClass('dn');
-                        // 取消所有选择控件的激活状态
-                        $('.custom-select-main').removeClass('input-focus');
-
-                        // 显示当前下拉框
-                        if (!isCurrentVisible || isSearch) {
-                            $list.removeClass('dn');
+                        var n = arguments[1]; // 搜索框输入的关键字
+                        for (var i = 0, l = data.length; i < l; i++) {
+                            var item = data[i];
+                            liHtml += '<li class="custom-select-item' + (i === 0 ? ' active' : '') + '" data-key="' + item.key + '" data-value="' + item.value + '">' + commonService.splitString(item.value, n) + '</li>';
                         }
-                        // 函数结束之后需要return false以终止函数的运行。
-                        // 如果不加上return false,当快速点击时会出现事件叠加
-                        // return false,会阻止事件传播，即不会响应document上绑定的事件
-                        return false;
                     }
+                    $list.empty().append(liHtml);
+                    return false;
+                };
 
-                    // 鼠标经过下拉列表
-                    function onMouseEnterItem() {
-                        $(this).addClass('active').siblings().removeClass('active');
-                    }
-
-                    // 点击下拉框的项
-                    function onClickItem() {
-                        var key = $(this).attr('data-key');
-                        var value = $(this).attr('data-value');
-                        $main.attr('data-key', key).attr('data-value', value);
-                        // key值为空则显示placeHolder的内容
-                        if (key === '') {
-                            $main.val('');
-                        } else {
-                            $main.val(value);
+                var filterData = function (n) {
+                    var _data = [];
+                    if (n !== '') {
+                        // 策略1，包含
+                        // 策略2，贪婪匹配
+                        // 仿照webStorm的文件搜索功能
+                        var regStr = '';
+                        for (var j = 0, lj = n.length; j < lj; j++) {
+                            // var j_item = n.charAt(j);
+                            // regStr += '(' + j_item.toUpperCase() + '|' + j_item.toLowerCase() + ').+?';
+                            regStr += n.charAt(j) + '[\\s\\S]*?';
                         }
+                        var reg = new RegExp(regStr, 'i');
+                        for (var i = 0, l = data.length; i < l; i++) {
+                            var item = data[i];
+                            if (reg.test(item.value)) {
+                                _data.push(data[i]);
+                            }
+                        }
+                    } else {
+                        _data = data;
+                    }
+                    return _data;
+                };
+
+                var searchResult = function (val) {
+                    "use strict";
+                    if (val) {
+                        url += '?' + attrs.field + '=' + val;
+                    }
+                    $.ajax({
+                        url: url,
+                        type: 'get',
+                        dataType: 'json',
+                        async: false,
+                        success: function (res) {
+                            "use strict";
+                            typeof scope[attrs.handle] === 'function' && (res = scope[attrs.handle](res));
+                            console.log(res);
+                            data = res;
+                        }
+                    });
+                };
+                // 初始化数据，根据指令中的data-model属性取得值
+                var model = attrs.model;
+                var url = attrs.url;
+                var data = [];
+                if (model) {
+                    data = scope[model];
+                } else if (url) {
+                    // 发送同步请求数据
+                    searchResult();
+                }
+                // 设置默认值
+                if (isDefault) {
+                    if (attrs.default === '') {
+                        $main.attr('data-key', data[0].key).attr('data-value', data[0].value);
+                        scope[ngModel] = data[0].value;
+                    } else {
+                        var _default = attrs.default.split(':');
+                        var _key = _default[0];
+                        var _value = _default[1];
+                        $main.attr('data-key', _key).attr('data-value', _value).val(_value);
+                        scope[ngModel] = _value;
+                    }
+                }
+
+                if (data && data.length > 0 && data[0].key !== undefined && data[0].value !== undefined) {
+                    generatorList(data);
+                } else {
+                    console.error('请使用data-model绑定下拉框的数据，且数据中必须包含key和value两个属性！');
+                    return;
+                }
+
+
+                var count = ++commonService.counts.customSelect;
+                $(ele)
+                    .on('click.cs', '.custom-select-main', onClickMain)
+                    .on('click.cs', '.custom-select-item:not(.custom-select-no-click)', onClickItem)
+                    .on('mouseenter.cs', '.custom-select-item', onMouseEnterItem)
+                ;
+                $main.on('keydown.cs', onKeyDownCustomSelect);
+                $main.on('keyup.cs', onKeyUpCustomSelect);
+                // 引入count,使得各个下拉框互不影响
+                $(document).off('click.customselect' + count).on('click.customselect' + count, onClickDocument);
+
+                // 点击选择框控件
+                function onClickMain() {
+                    // 当前下拉框是否为显示的
+                    var isCurrentVisible = $list.is(':visible');
+                    // 隐藏所有的下拉框
+                    $('.custom-select-list').addClass('dn');
+                    // 取消所有选择控件的激活状态
+                    $('.custom-select-main').removeClass('input-focus');
+
+                    // 显示当前下拉框
+                    if (!isCurrentVisible) {
+                        $list.removeClass('dn');
+                    }
+                    // 函数结束之后需要return false以终止函数的运行。
+                    // 如果不加上return false,当快速点击时会出现事件叠加
+                    // return false,会阻止事件传播，即不会响应document上绑定的事件
+                    return false;
+                }
+
+                // 鼠标经过下拉列表
+                function onMouseEnterItem() {
+                    $(this).addClass('active').siblings().removeClass('active');
+                }
+
+                // 点击下拉框的项
+                function onClickItem() {
+                    var key = $(this).attr('data-key');
+                    var value = $(this).attr('data-value');
+                    $main.attr('data-key', key).attr('data-value', value);
+                    // key值为空则显示placeHolder的内容
+                    if (key === '') {
+                        $main.val('');
+                        scope[ngModel] = '';
+                    } else {
+                        $main.val(value);
+                        scope[ngModel] = value;
+                    }
+                    $list.addClass('dn');
+                }
+
+                // 点击文档隐藏下拉框
+                function onClickDocument(e) {
+                    // 1.鼠标点击的是右键，不处理
+                    // 2.鼠标点击的元素在ele内部，不处理
+                    // 3.鼠标点击的元素在ele外部，
+                    //      1.取消select的激活状态
+                    //      2.判断下拉框是否显示，如果显示则让其隐藏
+                    if (e && e.which === 3) return;
+                    if (ele[0].contains(e.target)) return;
+
+                    if ($list.is(':visible')) {
                         $list.addClass('dn');
                     }
 
-                    // 点击文档隐藏下拉框
-                    function onClickDocument(e) {
-                        // 1.鼠标点击的是右键，不处理
-                        // 2.鼠标点击的元素在ele内部，不处理
-                        // 3.鼠标点击的元素在ele外部，
-                        //      1.取消select的激活状态
-                        //      2.判断下拉框是否显示，如果显示则让其隐藏
-                        if (e && e.which === 3) return;
-                        if (ele[0].contains(e.target)) return;
+                }
 
-                        if ($list.is(':visible')) {
-                            $list.addClass('dn');
-                        }
+                // 使用键盘控制下拉框
+                // 1.enter执行选择
+                // 2.up，down执行切换
+                var timeout = null;
 
+                function onKeyDownCustomSelect(e) {
+
+
+                    var which = e.which;
+
+                    var $activeLi = $list.find('.active');
+                    // 对键值的处理
+
+                    // enter
+                    if (which === 13) {
+                        $activeLi.click();
+                    }
+                    // esc
+                    if (which === 27) {
+                        $list.addClass('dn');
                     }
 
-                    // 使用键盘控制下拉框
-                    // 1.enter执行选择
-                    // 2.up，down执行切换
-                    var timeout = null;
-
-                    function onKeyDownCustomSelect(e) {
-
-
-                        var which = e.which;
-
-                        var $activeLi = $list.find('.active');
-                        // 对键值的处理
-
-                        // enter
-                        if (which === 13) {
-                            $activeLi.click();
-                        }
-                        // esc
-                        if (which === 27) {
-                            $list.addClass('dn');
-                        }
-
-                        // up left  down right
-                        if (which === 37 || which === 38 || which === 39 || which === 40) {
-                            $list.removeClass('dn');
-                            if ($activeLi.length === 0) {
-                                $list.find('li:first').addClass('active');
-                                $activeLi = $list.find('.active');
-                            }
-
-
-                            if (which === 37 || which === 38) {
-                                // 向上翻
-                                if ($activeLi.index() !== 0) {
-                                    $activeLi.prev().addClass('active').siblings().removeClass('active');
-
-                                    // // 控制滚动条滚动
-                                    // var list_s_t = $list.scrollTop();
-                                    // if(list_s_t > 0){
-                                    //     var overItemCount = Math.floor(list_s_t / itemHeight);
-                                    // }
-                                }
-                            }
-
-                            if (which === 39 || which === 40) {
-                                // 向下翻
-                                if ($activeLi.index() !== data.length - 1) {
-                                    $activeLi.next().addClass('active').siblings().removeClass('active');
-                                }
-                            }
-
-                            // 计算滚动条滚动所需参数
-                            var listHeight = $list.height();
-                            var itemHeight = $list.find('li:first').height();
-                            var maxItemCount = Math.floor(listHeight / itemHeight);
-
-                            // 移动激活的item之后对滚动条进行处理
+                    // up left  down right
+                    if (which === 37 || which === 38 || which === 39 || which === 40) {
+                        $list.removeClass('dn');
+                        if ($activeLi.length === 0) {
+                            $list.find('li:first').addClass('active');
                             $activeLi = $list.find('.active');
-                            // 当前所在行
-                            var currentLine = $activeLi.index() + 1;
-                            var sub = currentLine - maxItemCount;
-                            if (sub >= 0) {
-                                $list.scrollTop(sub * itemHeight);
+                        }
+
+
+                        if (which === 37 || which === 38) {
+                            // 向上翻
+                            if ($activeLi.index() !== 0) {
+                                $activeLi.prev().addClass('active').siblings().removeClass('active');
+
+                                // // 控制滚动条滚动
+                                // var list_s_t = $list.scrollTop();
+                                // if(list_s_t > 0){
+                                //     var overItemCount = Math.floor(list_s_t / itemHeight);
+                                // }
                             }
                         }
 
-                    }
-
-                    // 在keyup时进行检索
-                    var oldValue = '';
-
-                    function onKeyUpCustomSelect(e) {
-                        // 判断某些按键不进行检索
-                        // todo
-                        var which = e.which;
-                        if (which === 13 || which === 27 || (which >= 37 && which <= 40)) {
-                            return;
-                        }
-
-                        var newValue = $main.val();
-                        // 搜索策略：
-                        // 按键弹起时，如果输入框的值发生了改变，则进行检索，如果检索结果没有发生改变，不更新下拉框
-                        if (newValue !== oldValue) {
-                            oldValue = newValue;
-                            if (timeout) {
-                                $timeout.cancel();
+                        if (which === 39 || which === 40) {
+                            // 向下翻
+                            if ($activeLi.index() !== data.length - 1) {
+                                $activeLi.next().addClass('active').siblings().removeClass('active');
                             }
-                            timeout = $timeout(function () {
-                                generatorList(filterData(newValue), newValue);
-                            }, 200);
-                            $list.removeClass('dn');
+                        }
+
+                        // 计算滚动条滚动所需参数
+                        var listHeight = $list.height();
+                        var itemHeight = $list.find('li:first').height();
+                        var maxItemCount = Math.floor(listHeight / itemHeight);
+
+                        // 移动激活的item之后对滚动条进行处理
+                        $activeLi = $list.find('.active');
+                        // 当前所在行
+                        var currentLine = $activeLi.index() + 1;
+                        var sub = currentLine - maxItemCount;
+                        if (sub >= 0) {
+                            $list.scrollTop(sub * itemHeight);
                         }
                     }
 
+                }
 
-                };
+                // 在keyup时进行检索
+                var oldValue = '';
+
+                function onKeyUpCustomSelect(e) {
+                    // 判断某些按键不进行检索
+                    // todo
+                    var which = e.which;
+                    if (which === 13 || which === 27 || (which >= 37 && which <= 40)) {
+                        return;
+                    }
+
+                    var newValue = $main.val();
+                    // 搜索策略：
+                    // 按键弹起时，如果输入框的值发生了改变，则进行检索，如果检索结果没有发生改变，不更新下拉框
+                    if (newValue !== oldValue) {
+                        oldValue = newValue;
+                        if (timeout) {
+                            $timeout.cancel();
+                        }
+                        timeout = $timeout(function () {
+                            generatorList(filterData(newValue), newValue);
+                        }, 200);
+                        $list.removeClass('dn');
+                    }
+                }
+
+
             }
         };
     })
@@ -895,7 +921,7 @@ angular.module('app')
                 var minValue = attrs.min - 0 || 0;
                 var currentValue = attrs.current - 0 || minValue;
                 // 特殊类型：24小时制，且进行时间转化
-                if(attrs.type === 'H'){
+                if (attrs.type === 'H') {
                     maxValue = 1440; // 一天1440分钟 24*60
                 }
                 var per = max / (maxValue - minValue);
@@ -903,10 +929,10 @@ angular.module('app')
                 $(ele).find('.slider-select-value-min').text(minValue);
                 $(ele).find('.slider-select-value-max').text(attrs.type === 'H' ? '24' : maxValue).css('left', sliderBedWidth + 20);
                 var current = $(ele).find('.slider-select-value-current');
-                var getCurrentValue = function(left){
-                    if(attrs.type === 'H'){
+                var getCurrentValue = function (left) {
+                    if (attrs.type === 'H') {
                         return ('0' + Math.floor(Math.ceil(left / per) / 60)).slice(-2) + ':' + ('0' + (Math.ceil(left / per) % 60)).slice(-2);
-                    }else{
+                    } else {
                         return Math.ceil(left / per);
                     }
                 }
@@ -978,7 +1004,18 @@ angular.module('app')
             }
         }
     })
-    .directive('timeRange', function($compile){
+    /**
+     * 时间选择控件
+     * @example
+     * 使用方法1：使用默认的model
+     * <time-range></time-range>
+     *   使用方法2：使用自定义model
+     * <time-range data-start-hour-model="startHour"
+     *   data-start-minute-model="startMinute"
+     *   data-end-hour-model="endHour"
+     *   data-end-minute-model="endMinute"></time-range>
+     */
+    .directive('timeRange', function ($compile) {
         return {
             restrict: 'E',
             replace: true,
@@ -993,20 +1030,20 @@ angular.module('app')
             '<select class="form-control time-range-select time-range-end-minute" ng-change="changeTime(4)" ng-init="endMinute = minutes[0]" ng-model="endMinute" ng-options="m for m in minutes"></select>' +
             '</div>' +
             '</div>',
-            controller: function($scope){
+            controller: function ($scope) {
                 var hours = [];
                 var minutes = [];
-                for(var i=0;i<24;i++){
+                for (var i = 0; i < 24; i++) {
                     hours.push(('0' + i).slice(-2));
                 }
-                for(var i=0;i<60;i++){
+                for (var i = 0; i < 60; i++) {
                     minutes.push(('0' + i).slice(-2));
                 }
                 $scope.hours = hours;
                 $scope.minutes = minutes;
 
             },
-            link: function(scope, ele, attrs){
+            link: function (scope, ele, attrs) {
                 var startHour = attrs.startHourModel;
                 var startMinute = attrs.startMinuteModel;
                 var endHour = attrs.endHourModel;
@@ -1014,16 +1051,289 @@ angular.module('app')
                 // 是否使用自定义的model
                 if (startHour) {
                     var $main = $(ele).find('.time-range-content');
-                    $main.find('.time-range-start-hour').attr({'ng-model': startHour, 'ng-init': startHour + '=hours[0]'});
-                    $main.find('.time-range-start-minute').attr({'ng-model': startMinute, 'ng-init': startMinute + '=hours[0]'});
+                    $main.find('.time-range-start-hour').attr({
+                        'ng-model': startHour,
+                        'ng-init': startHour + '=hours[0]'
+                    });
+                    $main.find('.time-range-start-minute').attr({
+                        'ng-model': startMinute,
+                        'ng-init': startMinute + '=hours[0]'
+                    });
                     $main.find('.time-range-end-hour').attr({'ng-model': endHour, 'ng-init': endHour + '=hours[0]'});
-                    $main.find('.time-range-end-minute').attr({'ng-model': endMinute, 'ng-init': endMinute + '=hours[0]'});
+                    $main.find('.time-range-end-minute').attr({
+                        'ng-model': endMinute,
+                        'ng-init': endMinute + '=hours[0]'
+                    });
                     var _$main = $main.clone();
                     $main.remove();
                     $(ele).append($compile(_$main)(scope));
                 }
             }
-        }
+        };
+    })
+    /**
+     * 自定义下拉框组件
+     * 主要解决的问题：
+     *  1.默认下拉框在各个浏览器下的样式不一致
+     *  2.无法进行搜索
+     *
+     * 使用方法：
+     *  1.构造数据
+     *    1.基本数据构造：实现key和value两个属性即可
+     *    2.多功能数据构造：
+     *      1.级联数据构造
+     *      2.查询数据构造
+     *          1.拼音查询
+     *          2.联合查询
+     * 支持的功能：
+     *  1.常规数据显示，需要基本数据构造
+     *  2.级联下拉框
+     *  3.查询下拉框（支持拼音查询），需要构造数据
+     *
+     *  @example
+     *      <query-select class="app-query-select" data-model="queryCondition" default cs-ng-model="query"></query-select>
+     *      可以在$scope.query中取得选中的值？
+     *
+     */
+    // 使用span标签作为选择控件遇到问题：无法触发keydown事件，现在改为使用input框
+    .directive('querySelect', function ($timeout, $compile, commonService) {
+        return {
+            restrict: 'AE',
+            replace: true,
+            template: '<div class="query-select-wrap">' +
+            '<input type="text" class="query-select-show form-control disabled cd" readonly>' +
+            '<div class="query-select-list-wrap dn">' +
+            '<input type="text" class="query-select-main form-control" placeholder="输入搜索内容">' +
+            '<ul class="query-select-list"></ul>' +
+            '</div>' +
+            '</div>',
+            link: function (scope, ele, attrs) {
+                var $show = $(ele).find('input.query-select-show');
+                var $main = $(ele).find('input.query-select-main');
+                var $listWrap = $(ele).find('.query-select-list-wrap');
+                var $list = $(ele).find('.query-select-list');
+                var placeholder = attrs.placeholder;
+                $show.attr('placeholder', placeholder);
+                var ngModel = attrs.csNgModel;
+                var generatorList = function (data) {
+                    var liHtml = '';
+                    if (data.length === 0) {
+                        liHtml = '<li class="query-select-item query-select-no-click">没有匹配记录</li>';
+                    } else {
+                        var n = arguments[1]; // 搜索框输入的关键字
+                        for (var i = 0, l = data.length; i < l; i++) {
+                            var item = data[i];
+                            liHtml += '<li class="query-select-item' + (i === 0 ? ' active' : '') + '" data-key="' + item.key + '" data-value="' + item.value + '">' + commonService.splitString(item.value, n) + '</li>';
+                        }
+                    }
+                    $list.empty().append(liHtml);
+                    return false;
+                };
+
+                var filterData = function (n) {
+                    var _data = [];
+                    if (n !== '') {
+                        // 策略1，包含
+                        // 策略2，贪婪匹配
+                        // 仿照webStorm的文件搜索功能
+                        var regStr = '';
+                        for (var j = 0, lj = n.length; j < lj; j++) {
+                            // var j_item = n.charAt(j);
+                            // regStr += '(' + j_item.toUpperCase() + '|' + j_item.toLowerCase() + ').+?';
+                            regStr += n.charAt(j) + '[\\s\\S]*?';
+                        }
+                        var reg = new RegExp(regStr, 'i');
+                        for (var i = 0, l = data.length; i < l; i++) {
+                            var item = data[i];
+                            if (reg.test(item.value)) {
+                                _data.push(data[i]);
+                            }
+                        }
+                    } else {
+                        _data = data;
+                    }
+                    return _data;
+                };
+
+                // 初始化数据，根据指令中的data-model属性取得值
+                var model = attrs.model;
+                var data = [];
+                if (model) {
+                    data = scope[model];
+                }
+
+                if (data && data.length > 0 && data[0].key !== undefined && data[0].value !== undefined) {
+                    generatorList(data);
+                } else {
+                    console.error('请使用data-model绑定下拉框的数据，且数据中必须包含key和value两个属性！');
+                    return;
+                }
+
+
+                var count = ++commonService.counts.customSelect;
+                $(ele)
+                    .on('click.cs', '.query-select-show', onClickShow)
+                    .on('click.cs', '.query-select-item:not(.query-select-no-click)', onClickItem)
+                    .on('mouseenter.cs', '.query-select-item', onMouseEnterItem)
+                ;
+                $main.on('keydown.cs', onKeyDownQuerySelect);
+                $main.on('keyup.cs', onKeyUpQuerySelect);
+                // 引入count,使得各个下拉框互不影响
+                $(document).off('click.queryselect' + count).on('click.queryselect' + count, onClickDocument);
+
+                // 点击选择框控件
+                function onClickShow() {
+                    // 当前下拉框是否为显示的
+                    var isCurrentVisible = $listWrap.is(':visible');
+                    // 隐藏所有的下拉框
+                    $('.query-select-list-wrap').addClass('dn');
+                    // 取消所有选择控件的激活状态
+                    $('.query-select-main').removeClass('input-focus');
+
+                    // 显示当前下拉框
+                    if (!isCurrentVisible) {
+                        $listWrap.removeClass('dn');
+                    }
+                    // 函数结束之后需要return false以终止函数的运行。
+                    // 如果不加上return false,当快速点击时会出现事件叠加
+                    // return false,会阻止事件传播，即不会响应document上绑定的事件
+                    return false;
+                }
+
+                // 鼠标经过下拉列表
+                function onMouseEnterItem() {
+                    $(this).addClass('active').siblings().removeClass('active');
+                }
+
+                // 点击下拉框的项
+                function onClickItem() {
+                    var key = $(this).attr('data-key');
+                    var value = $(this).attr('data-value');
+                    $show.attr('data-key', key).attr('data-value', value);
+                    // key值为空则显示placeHolder的内容
+                    if (key === '') {
+                        $show.val('');
+                        scope.$parent[ngModel] = '';
+                    } else {
+                        $show.val(value);
+                        scope.$parent[ngModel] = value;
+                    }
+                    $listWrap.addClass('dn');
+                }
+
+                // 点击文档隐藏下拉框
+                function onClickDocument(e) {
+                    // 1.鼠标点击的是右键，不处理
+                    // 2.鼠标点击的元素在ele内部，不处理
+                    // 3.鼠标点击的元素在ele外部，
+                    //      1.取消select的激活状态
+                    //      2.判断下拉框是否显示，如果显示则让其隐藏
+                    if (e && e.which === 3) return;
+                    if (ele[0].contains(e.target)) return;
+
+                    if ($listWrap.is(':visible')) {
+                        $listWrap.addClass('dn');
+                    }
+
+                }
+
+                // 使用键盘控制下拉框
+                // 1.enter执行选择
+                // 2.up，down执行切换
+                var timeout = null;
+
+                function onKeyDownQuerySelect(e) {
+
+
+                    var which = e.which;
+
+                    var $activeLi = $listWrap.find('.active');
+                    // 对键值的处理
+
+                    // enter
+                    if (which === 13) {
+                        $activeLi.click();
+                    }
+                    // esc
+                    if (which === 27) {
+                        $listWrap.addClass('dn');
+                    }
+
+                    // up left  down right
+                    if (which === 37 || which === 38 || which === 39 || which === 40) {
+                        $listWrap.removeClass('dn');
+                        if ($activeLi.length === 0) {
+                            $listWrap.find('li:first').addClass('active');
+                            $activeLi = $listWrap.find('.active');
+                        }
+
+
+                        if (which === 37 || which === 38) {
+                            // 向上翻
+                            if ($activeLi.index() !== 0) {
+                                $activeLi.prev().addClass('active').siblings().removeClass('active');
+
+                                // // 控制滚动条滚动
+                                // var list_s_t = $list.scrollTop();
+                                // if(list_s_t > 0){
+                                //     var overItemCount = Math.floor(list_s_t / itemHeight);
+                                // }
+                            }
+                        }
+
+                        if (which === 39 || which === 40) {
+                            // 向下翻
+                            if ($activeLi.index() !== data.length - 1) {
+                                $activeLi.next().addClass('active').siblings().removeClass('active');
+                            }
+                        }
+
+                        // 计算滚动条滚动所需参数
+                        var listHeight = $list.height();
+                        var itemHeight = $list.find('li:first').height();
+                        var maxItemCount = Math.floor(listHeight / itemHeight);
+
+                        // 移动激活的item之后对滚动条进行处理
+                        $activeLi = $list.find('.active');
+                        // 当前所在行
+                        var currentLine = $activeLi.index() + 1;
+                        var sub = currentLine - maxItemCount;
+                        if (sub >= 0) {
+                            $list.scrollTop(sub * itemHeight);
+                        }
+                    }
+
+                }
+
+                // 在keyup时进行检索
+                var oldValue = '';
+
+                function onKeyUpQuerySelect(e) {
+                    // 判断某些按键不进行检索
+                    // todo
+                    var which = e.which;
+                    if (which === 13 || which === 27 || (which >= 37 && which <= 40)) {
+                        return;
+                    }
+
+                    var newValue = $main.val();
+                    // 搜索策略：
+                    // 按键弹起时，如果输入框的值发生了改变，则进行检索，如果检索结果没有发生改变，不更新下拉框
+                    if (newValue !== oldValue) {
+                        oldValue = newValue;
+                        if (timeout) {
+                            $timeout.cancel();
+                        }
+                        timeout = $timeout(function () {
+                            generatorList(filterData(newValue), newValue);
+                        }, 200);
+                        $listWrap.removeClass('dn');
+                    }
+                }
+
+
+            }
+        };
     })
 
 ;

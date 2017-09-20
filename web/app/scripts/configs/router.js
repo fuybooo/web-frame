@@ -18,7 +18,7 @@ angular.module('app')
         'login': 'login',
         'app': 'app', // 抽象视图
         'app.dashboard': 'app.dashboard',
-        'app.alertBoard': 'app.alertBoard',
+        'app.alarm': 'app.alarm',
         'app.device': 'app.device',
         'app.deviceGroup': 'app.deviceGroup',
         'app.user': 'app.user',
@@ -69,10 +69,10 @@ angular.module('app')
                 templateUrl: 'app/views/dashboard.html',
                 controller: 'DashboardController'
             })
-            .state(routers['app.alertBoard'], {
-                url: '/alertBoard',
+            .state(routers['app.alarm'], {
+                url: '/alarm',
                 templateUrl: 'app/views/alert-board.html',
-                controller: 'AlertBoardController'
+                controller: 'AlarmController'
             })
             .state(routers['app.device'], {
                 url: '/device',

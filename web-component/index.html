@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en" class="w h">
+    <head>
+        <meta charset="UTF-8">
+        <!--<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">-->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="renderer" content="webkit">
+        <!--<meta http-equiv="Cache-Control" content="no-siteapp" />-->
+        <title ng-bind="pageTitle"></title>
+
+        <!--引入css文件-->
+        <!--对bootstrap.css引用路径进行修改&#45;&#45;保证压缩前后其引用字体文件的一致性-->
+        <!--从bower中将资源分别复制到指定地方1.bootstrap/css复制到src/assets/style下,bootstrap/fonts复制到app/fonts下-->
+        <link rel="stylesheet" href="src/assets/style/bootstrap.css">
+        <link rel="stylesheet" href="src/assets/style/bootstrap-table.css">
+        <link rel="stylesheet" href="src/assets/style/bootstrap-datetimepicker.css">
+        <link rel="stylesheet" href="src/assets/style/kalendae.css">
+        <link rel="stylesheet" href="src/assets/style/base.css">
+        <link rel="stylesheet" href="src/assets/style/popupwin.css">
+        <link rel="stylesheet" href="src/assets/style/style.css">
+
+        <!--加载环境-->
+        <script src="src/environments/env.setting.dev.js"></script>
+        <!--引入库文件-->
+        <!--手动引入库文件需要注意依赖关系-->
+        <script src="src/assets/vendor/jquery/jquery.js"></script>
+        <script src="src/assets/vendor/underscore/underscore.js"></script>
+        <script src="src/assets/vendor/moment/moment.js"></script>
+        <script src="src/assets/vendor/kalendae/kalendae.js"></script>
+        <script src="src/assets/vendor/angular/angular.js"></script>
+        <script src="src/assets/vendor/bootstrap/js/bootstrap.js"></script>
+        <script src="src/assets/vendor/echarts/echarts.js"></script>
+        <script src="src/assets/vendor/bootstrap-table/bootstrap-table.js"></script>
+        <script src="src/assets/vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
+        <script src="src/assets/vendor/angular-ui-load/angular-ui-load.js"></script>
+        <script src="src/assets/vendor/angular-ui-router/angular-ui-router.js"></script>
+        <script src="src/assets/vendor/angular-animate/angular-animate.js"></script>
+        <script src="src/assets/vendor/angular-sanitize/angular-sanitize.js"></script>
+        <script src="src/assets/vendor/angular-touch/angular-touch.js"></script>
+        <script src="src/assets/vendor/angular-translate/angular-translate.js"></script>
+        <script src="src/assets/vendor/angular-ueditor/angular-ueditor.js"></script>
+        <script src="src/assets/vendor/bootstrap-table/bootstrap-table-locale-all.js"></script>
+
+
+        <!--引入angular主模块 app-->
+        <script src="src/app/main/app.js"></script>
+        <!--国际化-->
+        <script src="src/assets/language/cn.js"></script>
+        <!--<script src="src/assets/language/en.js"></script>-->
+        <!--路由-->
+        <script src="src/app/main/router.js"></script>
+        <!--公共资源-->
+        <script src="src/app/shared/common-service.js"></script>
+        <script src="src/app/shared/data-service.js"></script>
+        <script src="src/app/shared/common-directive.js"></script>
+        <script src="src/app/shared/common-filter.js"></script>
+        <script src="src/app/shared/bootstrap-table-directive.js"></script>
+        <script src="src/app/shared/popupwin-service.js"></script>
+
+
+
+        <!--各模块资源 开发过程中，直接依次引入新增的文件即可，部署时会在任务中引入-->
+        <script src="src/app/login/login-controller.js"></script>
+        <script src="src/app/main/nav-directive.js"></script>
+        <script src="src/app/dashboard/dashboard-controller.js"></script>
+        <script src="src/app/alarm/alert-board-controller.js"></script>
+        <script src="src/app/device/device-controller.js"></script>
+        <script src="src/app/device/device-group-controller.js"></script>
+        <script src="src/app/application/application-controller.js"></script>
+        <script src="src/app/application/application-family-controller.js"></script>
+        <script src="src/app/content/content-controller.js"></script>
+        <script src="src/app/content/content-family-controller.js"></script>
+        <script src="src/app/policy/policy-controller.js"></script>
+        <script src="src/app/policy/policy-default-controller.js"></script>
+        <script src="src/app/policy/policy-violation-controller.js"></script>
+        <script src="src/app/push/push-controller.js"></script>
+        <script src="src/app/setting/setting-logo-controller.js"></script>
+        <script src="src/app/setting/setting-mgr-controller.js"></script>
+        <script src="src/app/setting/setting-protocol-controller.js"></script>
+        <script src="src/app/setting/setting-role-controller.js"></script>
+        <script src="src/app/setting/setting-serial-controller.js"></script>
+        <script src="src/app/setting/setting-version-controller.js"></script>
+        <script src="src/app/setting/setting-data-controller.js"></script>
+        <script src="src/app/setting/setting-import-controller.js"></script>
+        <script src="src/app/setting/setting-log-controller.js"></script>
+        <script src="src/app/user/user-controller.js"></script>
+        <script src="src/app/user/user-dept-controller.js"></script>
+        <script src="src/app/user/user-group-controller.js"></script>
+
+    </head>
+    <!--对index.html中的修改需要视情况同步到built中的index.html中去-->
+    <body class="w h min-h600">
+        <div ui-view class="w h">
+            <div class="index-loading">
+                <label>Loading</label>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </body>
+</html>

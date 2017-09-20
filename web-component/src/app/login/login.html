@@ -1,0 +1,63 @@
+<div class="container-wrap login-container-wrap">
+    <!--此处的login-box可以提取出来,当需要的时候可以在别的地方使用-->
+    <div class="login-box login-content">
+        <div class="login-tab text-right">
+            <div class="btn-group">
+                <button class="btn btn-major btn-active">管理员</button>
+                <button class="btn btn-major">自助服务</button>
+            </div>
+        </div>
+        <div class="login-logo"></div>
+        <h1 class="login-title">ThunderEMM企业移动管理</h1>
+        <!--form-horizontal使得表单可以水平排列-->
+        <form class="form-horizontal login-form" role="form" name="login_form" novalidate>
+            <div class="form-group">
+                <label for="login-username" class="col-xs-3 control-label">账号</label>
+                <div class="col-xs-8">
+                    <input type="text" name="username" ng-model="loginInfo.username" placeholder="请输入您的账号"
+                           class="form-control" id="login-username"
+                           required ng-keydown="keyLogin($event)">
+                    <!--使用指令代替-->
+                    <!--<span class="form-error-tip text-danger" ng-show="login_form.username.$dirty && login_form.username.$invalid">账号不能为空</span>-->
+                    <span class="pa" validate-generator></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="login-password" class="col-xs-3 control-label">密码</label>
+                <div class="col-xs-8">
+                    <input type="password" name="password" ng-model="loginInfo.password" placeholder="请输入您的密码"
+                           class="form-control" id="login-password"
+                           required ng-keydown="keyLogin($event)">
+                    <span class="pa" validate-generator></span>
+                </div>
+            </div>
+            <!--此处应该使用ng-if,如果使用ng-show，则登录按钮无法点击，因为此输入框为required-->
+            <div class="form-group" ng-if="isValidateCodeShow">
+                <label for="login-validateCode" class="col-xs-3 control-label">验证码</label>
+                <div class="col-xs-8">
+                    <input type="text" name="validateCode" ng-model="loginInfo.validateCode" placeholder="请输入验证码"
+                           class="form-control w_50 fl" id="login-validateCode"
+                           required ng-keydown="keyLogin($event)">
+                    <validate-code></validate-code>
+                    <!--该标签是一个指令，且它依赖于它的一个兄弟节点，在加载时会出现依赖元素没有加载出来的错误，故给其加上ng-if-->
+                    <!--对于指定了ng-if的validate-generator指令需要指定data-form属性，因为ng-if生成的元素还不在dom中，无法找到其所在的form元素内-->
+                    <span ng-if="isValidateCodeShow" class="pa" validate-generator="login-validateCode" data-form="login_form"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-offset-3 col-xs-8 dif">
+                    <div class="checkbox fl">
+                        <input type="checkbox" id="remember-me">记住密码
+                    </div>
+                    <a class="register-now" ui-sref="register">立即注册</a>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-offset-1 col-xs-10">
+                    <button type="button" class="btn btn-main btn-block" ng-disabled="login_form.$invalid" ng-click="runLogin()">登录</button>
+                </div>
+            </div>
+        </form>
+        <p class="login-footer">Copyright 2017, Quarkdata Software Co., Ltd. All Rights Reserved 京ICP备16050279号-2</p>
+    </div>
+</div>

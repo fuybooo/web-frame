@@ -94,4 +94,34 @@
 
     <input type="time" pattern="hh:ii:ss">
     <div ng-bind-html="htmlTest"></div>
+
+    <!--<div class="row mt100 mb30">-->
+        <!--<div class="col-sm-12">-->
+            <!--测试远程选择框-->
+        <!--</div>-->
+    <!--</div><div class="row mt100 mb100">-->
+    <!--<div class="col-sm-12">-->
+        <!--<custom-select class="app-query-select" data-url="http://localhost:8000/api/heroes" data-handle="handleResult" cs-ng-model="heroName" search></custom-select>-->
+        <!--<button ng-click="add()">add</button>-->
+    <!--</div>-->
+    <div class="row mt100 mb30">
+        <div class="col-sm-12">
+            测试查询选择框
+        </div>
+    </div><div class="row mt100 mb100">
+    <div class="col-sm-12">
+        <query-select class="app-query-select" data-model="mockQueryData" cs-ng-model="querySelectTest" data-placeholder="请选择内容"></query-select>
+        <button ng-click="testQuerySelectMethod()">add</button>
+    </div>
+
+    <div class="row mt100 mb30">
+        <div class="col-sm-12">
+            测试查询选择框
+        </div>
+    </div><div class="row mt100 mb100">
+    <div class="col-sm-12">
+        <query-select class="app-query-select" data-model="mockQueryData" cs-ng-model="querySelectTest2" data-placeholder="请选择内容"></query-select>
+        <button ng-click="testQuerySelectMethod()">add</button>
+    </div>
+</div>
 </div>
